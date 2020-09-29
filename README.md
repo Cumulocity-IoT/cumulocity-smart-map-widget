@@ -16,7 +16,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
   
 
-![](https://labcase.softwareag.com/storage/d/a5fc0caf3cd8375096a98ff521cd8311)
+![](https://user-images.githubusercontent.com/32765455/94537868-f5452f00-0260-11eb-830e-e103546d9567.png)
 
     
 
@@ -174,44 +174,24 @@ The Smart Map widget help you to track real-time device locations in indoor with
   
 
 ```
-
   
-
-"angular-resize-event": "^1.1.1"
-
-  
-
-"fontawesome": "4.7.2"
-
-  
-
-"group-array": "^1.0.0"
-
-  
-
-"leaflet-draw": "^1.0.4"
-
-  
-
-"leaflet-extra-markers": "^1.2.1"
-
-  
-
-"leaflet2": "npm:leaflet@^1.6.0"
-
-  
-
-"@angular/material": "8.2.3"
-
-  
-
-"ngx-bootstrap": "5.5.0"
-
-
-
-"leaflet.markercluster": "^1.4.1"
-
-  
+ "angular-resize-event": "^1.1.1" 
+ 
+ "fontawesome": "4.7.2"
+ 
+ "group-array": "^1.0.0"
+ 
+ "leaflet-draw": "^1.0.4"
+ 
+ "leaflet-extra-markers": "^1.2.1"
+ 
+ "leaflet2": "npm:leaflet@^1.6.0"
+ 
+ "@angular/material": "8.2.3"
+ 
+ "ngx-bootstrap": "5.5.0"
+ 
+ "leaflet.markercluster": "^1.4.1"
 
 ```
 
@@ -235,9 +215,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
 
     ```
-
     npm i angular-resize-event@1.1.1 fontawesome@4.7.2 group-array@1.0.0 leaflet-draw@1.0.4 leaflet-extra-markers@1.2.1 leaflet2@npm:leaflet@^1.6.0 @angular/material@8.2.3 ngx-bootstrap@5.5.0 leaflet.markercluster@1.4.1
-
     ```
 
 
@@ -247,7 +225,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
   
 
-3. Grab the Smart Map **[Latest Release Binary](https://labcase.softwareag.com/projects/c8y-smart-map/repository/revisions/master/show/gp-smart-map-project/releases)**.
+3. Grab the Smart Map **[Latest Release Binary](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/1.0.0/gp-smart-map-1.0.0.tgz)**.
 
   
 
@@ -260,12 +238,8 @@ The Smart Map widget help you to track real-time device locations in indoor with
   
 
     ```
-
         
-
     npm i <binary file path>/gp-smart-map-1.2.0.tgz
-
-        
 
     ```
 
@@ -273,7 +247,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
   
 
-5. Copy smart-map.css file [from here](https://labcase.softwareag.com/projects/c8y-smart-map/repository/revisions/master/show/gp-smart-map-project/releases) and paste it at /cumulocity-app-builder/ui-assets/
+5. Copy smart-map.css file [from here](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/1.0.0/smart-map.css) and paste it at /cumulocity-app-builder/ui-assets/
 
 
     **Note**: Ignore this step if file is already copied during smart map settings installation
@@ -294,11 +268,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
     ```
 
-    
-
     @import '~@angular/material/prebuilt-themes/indigo-pink.css';
-
-    
 
     ```
 
@@ -314,11 +284,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
     ```
 
-    
-
-    @import 'smart-map.css';
-
-    
+    @import 'smart-map.css';    
 
     ```
 
@@ -332,32 +298,17 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
     ```
 
-    
-
     import {GPSmartMapModule} from 'gp-smart-map';
 
-    
+    @NgModule({    
 
-    @NgModule({
+      imports: [
 
-    
+      GPSmartMapModule
 
-    imports: [
-
-    
-
-    GPSmartMapModule
-
-    
-
-    ]
-
-    
-
+      ]
     })
-
     
-
     ```
 
   
@@ -372,31 +323,17 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
     ```
 
-    
-
     //Start App Builder
-
-    
 
     npm run start
 
-    
-
     // Build App
-
-    
 
     npm run build
 
-    
-
     // Deploy App
 
-    
-
     npm run deploy
-
-    
 
     ```
 
@@ -422,13 +359,9 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
   
 
-    ```
-
-    
+    ```    
 
     npm i angular-resize-event@1.1.1 fontawesome@4.7.2 group-array@1.0.0 leaflet-draw@1.0.4 leaflet-extra-markers@1.2.1 leaflet2@npm:leaflet@^1.6.0 @angular/material@8.2.3 ngx-bootstrap@5.5.0 leaflet.markercluster@1.4.1
-
-    
 
     ```
 
@@ -442,7 +375,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
   
 
-3. Grab the Smart Map **[Latest Release Binary](https://labcase.softwareag.com/projects/c8y-smart-map/repository/revisions/master/show/gp-smart-map-project/releases)**
+3. Grab the Smart Map **[Latest Release Binary](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/1.0.0/gp-smart-map-1.0.0.tgz)**
 
   
 
@@ -456,19 +389,13 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
     ```
 
-    
-
     npm i <binary file path>/gp-smart-map-1.2.0.tgz
-
-    
 
     ```
 
-  
+    
 
-  
-
-5. Copy smart-map.css file [from here](https://labcase.softwareag.com/projects/c8y-smart-map/repository/revisions/master/show/gp-smart-map-project/releases) and paste it at /cumulocity-app/branding/
+5. Copy smart-map.css file [from here](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/1.0.0/smart-map.css) and paste it at /cumulocity-app/branding/
 
 
     **Note**: Ignore this step if file is already copied during smart map settings installation
@@ -496,11 +423,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
     ```
 
-    
-
     @import '~@angular/material/prebuilt-themes/indigo-pink.css';
-
-    
 
     ```
 
@@ -515,12 +438,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
   
 
     ```
-
-    
-
     @import 'smart-map.css';
-
-    
 
     ```
 
@@ -534,31 +452,17 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
     ```
 
-    
-
     import {GPSmartMapModule} from 'gp-smart-map';
-
-    
 
     @NgModule({
 
+      imports: [
+
+      GPSmartMapModule
+
+      ]
     
-
-    imports: [
-
-    
-
-    GPSmartMapModule
-
-    
-
-    ]
-
-    
-
     })
-
-    
 
     ```
 
@@ -574,31 +478,17 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
     ```
 
-    
-
     //Start App Builder
-
-    
 
     npm run start
 
-    
-
     // Build App
-
-    
 
     npm run build
 
-    
-
     // Deploy App
 
-    
-
     npm run deploy
-
-    
 
     ```
 
@@ -654,11 +544,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
     ```
 
-    
-
-    git clone git@labcase.softwareag.com:labcase/c8y-smart-map.git
-
-    
+    git clone https://github.com/SoftwareAG/cumulocity-smart-map-widget.git
 
     ```
 
@@ -667,14 +553,8 @@ The Smart Map widget help you to track real-time device locations in indoor with
 2. Change directory:
 
   
-
     ```
-
-    
-
-    cd gp-smart-map
-
-    
+    cd gp-smart-map-project
 
     ```
 
@@ -685,12 +565,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
   
 
     ```
-
-    
-
-    git checkout v1.2.0
-
-    
+    git checkout v1.0.0
 
     ```
 
@@ -701,12 +576,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
   
 
     ```
-
-    
-
     npm install
-
-    
 
     ```
 
@@ -717,12 +587,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
   
 
     ```
-
-    
-
     npm run start
-
-    
 
     ```
 
@@ -734,11 +599,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
     ```
 
-    
-
     npm run build
-
-    
 
     ```
 
@@ -749,12 +610,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
   
 
     ```
-
-    
-
     npm run deploy
-
-    
 
     ```
 
@@ -1038,13 +894,10 @@ Congratulations! Smart Map is configured.
 
   
 
-```
-
-  
+```  
 
 "contentSecurityPolicy": "base-uri 'none'; default-src 'self' 'unsafe-inline' http: https: ws: wss:; connect-src 'self' *.billwerk.com http: https: ws: wss:; script-src 'self' open.mapquestapi.com *.twitter.com *.twimg.com 'unsafe-inline' 'unsafe-eval' data:; style-src * 'unsafe-inline' blob:; img-src * data: blob:; font-src * data:; frame-src *;"
 
-  
 
 ```
 
