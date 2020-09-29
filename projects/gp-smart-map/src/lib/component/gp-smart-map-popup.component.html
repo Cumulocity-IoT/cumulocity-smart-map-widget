@@ -1,0 +1,11 @@
+<div *ngFor="let elem of popupDisplayList">
+    <div *ngIf="(appId && elem.label === 'ID:' ) else elseBlock" class="lt-popup-row"><label
+        class="">{{elem.label}}</label>
+      <div class="lt-navigate-dashboard" title="Navigate to Dashboard" (click)="navigateToDashboard(elem.value)">{{elem.value}}</div>
+    </div>
+    <ng-template #elseBlock>
+        <div class="lt-popup-row"><label class="">{{elem.label}}</label>
+        <div class="">{{elem.value}}</div>
+        </div>
+    </ng-template>
+</div>

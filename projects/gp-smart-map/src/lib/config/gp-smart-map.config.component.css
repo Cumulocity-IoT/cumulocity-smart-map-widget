@@ -1,0 +1,94 @@
+.mb-2 {
+    margin-bottom: 0.5rem;
+}
+
+.mb-3 {
+    margin-bottom: 1rem;
+}
+
+.mb-4 {
+    margin-bottom: 1.5rem;
+}
+.ml-0 {
+    margin-left: 0px;
+}
+
+.pl-0 {
+    padding-left: 0px;
+}
+
+.pr-0 {
+    padding-right: 0px;
+}
+
+.pt-4 {
+    padding-top: 4px;
+}
+
+input[readonly].readonly-control {
+    background-color: transparent;
+    border: 0;
+    font-size: 1em;
+}
+
+.ltc-flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.ltc-title-label {
+    border-bottom: 1px solid #dfe3e4;
+}
+.slide-toggle {
+  display: flex;
+}
+
+.slide-toggle-margin {
+  margin: 10px;
+}
+
+.slide-toggle-margin .mat-slide-toggle-label {
+  display: flex !important;
+}
+.input-width {
+  width: 100%;
+}
+.locationTracker-config .form-group{
+    margin-bottom: 10px;
+}
+.mat-slider-horizontal{
+    width: 100%;
+}
+.lt-heat-legend-low-config {
+  height: 15px;
+  width: 15px;
+  background-color: blue;
+  opacity: 0.4;
+  display: inline-block;
+  margin-right: 5px;
+  margin-bottom: -3px;
+}
+
+.lt-heat-legend-medium-config {
+  height: 15px;
+  width: 15px;
+  background-color: lime;
+  display: inline-block;
+  margin-right: 5px;
+  margin-bottom: -3px;
+}
+
+.lt-heat-legend-high-config {
+  height: 15px;
+  width: 15px;
+  background-color: red;
+  display: inline-block;
+  margin-right: 5px;
+  margin-bottom: -3px;
+}
+
+.lt-heat-legend-config {
+  margin-right: 5px;
+  width: 140px;
+  display: inline-block;
+}

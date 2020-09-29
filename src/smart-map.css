@@ -1,0 +1,119 @@
+@import '../node_modules/leaflet2/dist/leaflet.css';
+@import '../node_modules/leaflet-draw/dist/leaflet.draw.css';
+@import './../node_modules/leaflet.markercluster/dist/MarkerCluster.css';
+@import './../node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css';
+
+
+.lt-popup {
+    max-width: auto;
+}
+
+.lt-popup .leaflet-popup-content-wrapper .leaflet-popup-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.lt-popup .leaflet-popup-content-wrapper {
+    border-radius: 10px;
+    background: #3c3ce494;
+}
+
+.lt-popup .leaflet-popup-tip {
+    border-radius: 0px !important;
+    background: #3c3ce494;
+}
+
+.lt-popup-row {
+    display: inline-flex;
+    flex-direction: row;
+    /*   margin-bottom: 5px; */
+    align-items: center;
+}
+
+.lt-popup-row label {
+    margin-bottom: 0px;
+    margin-right: 5px;
+    /* flex: 1; */
+    width: 50px;
+    color: #fff
+}
+
+.lt-popup-row div {
+    /* flex: 2; */
+    flex: none;
+    color: #fff
+}
+
+.lt-actions-row {
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 5px;
+}
+
+.ng-select.am-select {
+    border: 0px;
+    min-height: 0px;
+    border-radius: 0;
+}
+
+.ng-select.am-select .ng-select-container {
+    min-height: 32px;
+    border-radius: 0;
+}
+
+.ng-select.ng-select-single.am-select .ng-select-container {
+    min-height: 32px;
+    height: 32px;
+    border-radius: 0px;
+}
+
+.pull-right {
+    text-align: right;
+}
+
+.pt-5 {
+    padding-top: 5px;
+}
+
+/* Location tracking css end */
+
+.extra-marker i.fa {
+    margin-top: -35px;
+    display: block;
+    margin-left: 7px;
+}
+
+.leaflet-top,
+.leaflet-bottom {
+    z-index: 1000 !important
+}
+
+.leaflet-popup {
+    margin-bottom: 0 !important;
+}
+
+.leaflet-popup-tip-container {
+    left: 0 !important;
+}
+
+.lt-gf-base {
+    border: 1px dashed;
+}
+
+.lt-image-overlay {
+    z-index: -1 !important;
+}
+
+
+/* Smart Map Settings css */
+.gp-input-group {
+    margin: 5%;
+}
+
+.gp-max {
+    width: 100%;
+}
+
+.gp-center {
+    text-align: center;
+}

@@ -1,0 +1,51 @@
+<div (resized)="onResized($event)" class="xfloor-map-root">
+    <div #prefloormap class="floor-map-infos">
+        <div class="lt-header-bar">
+        <div class="lt-header-filter" *ngIf="isHeatMap && !this.realtime && !isLastEventHeatmap">
+        <label>HeatMap Events :</label>
+          <mat-form-field appearance="outline" class="dateChooserStyling">
+          <input matInput [matDatepicker]="fromPicker" [max]="minCurrentDate" placeholder=" From"
+            (dateInput)="dateChanged('from',$event)" />
+          <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+          <mat-datepicker #fromPicker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="dateChooserStyling">
+          <input matInput [matDatepicker]="toPicker" [min]="minToDate" [max]="currentDate" placeholder="To"
+            (dateInput)="dateChanged('to',$event)" />
+          <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+          <mat-datepicker #toPicker></mat-datepicker>
+        </mat-form-field>
+        <button type="button" title="Filter date range" class="btn btn-default filter-btn" (click)="filter()">
+          <i c8y-icon="filter" class="fa fw fa-filter"></i>
+        </button>
+        </div>
+        <div class="active-tracker">
+            <label *ngIf="mapType === 'Hybrid'">Active Tracker: <ng-container
+                *ngIf="isBeaconActive || isIndoor; else elseTemplate">
+                In Door
+              </ng-container>
+              <ng-template #elseTemplate>
+                Out Door
+              </ng-template>
+            </label>
+          <label *ngIf="isHeatMap">
+            Heat Intensity:
+            <span class="lt-heat-legend-low"></span>
+            <span class="lt-heat-legend">{{heatMapLegendLow}}</span>
+            <span class="lt-heat-legend-medium"></span>
+            <span class="lt-heat-legend">{{heatMapLegendMedium}}</span>
+            <span class="lt-heat-legend-high"></span>
+            <span class="lt-heat-legend">{{heatMapLegendHigh}}</span>
+          </label>
+          <button type="button" class="btn btn-link c8y-realtime" title="Toggle realtime" (click)="toggleRealTime()">
+                <span [ngClass]="realtime?'c8y-pulse active' : 'c8y-pulse inactive'"></span>
+                <span>Realtime</span>      
+          </button>
+          <button mat-icon-button style="color:#1776BF;" type="button" class="button"
+            (click)="refresh()"><span class="fa fa-refresh"></span></button>
+        </div>
+        </div>
+    </div>
+    <mat-progress-bar *ngIf="isBusy" mode="indeterminate"></mat-progress-bar>
+    <div #elfloormap [style.height.px]="height" [style.width.px]="width"></div>
+</div>

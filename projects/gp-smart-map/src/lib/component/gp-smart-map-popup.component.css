@@ -1,0 +1,21 @@
+.lt-popup-row {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.lt-popup-row label {
+  margin-bottom: 0px;
+  margin-right: 5px;
+  width: 50px;
+  color: #fff
+}
+
+.lt-popup-row div {
+  flex: none;
+  color: #fff
+}
+.lt-navigate-dashboard {
+ text-decoration: underline;
+ cursor: pointer;
+}
