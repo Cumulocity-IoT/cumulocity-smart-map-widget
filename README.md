@@ -99,7 +99,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
   
 
-*  **[Smart Map Settings](https://labcase.softwareag.com/projects/smart-map-settings/repository/revisions/master/entry/smart-map-settings/README.md):** Configure multiple floor plans with live preview.
+*  **[Smart Map Settings](https://github.com/SoftwareAG/cumulocity-smart-map-settings-widget):** Configure multiple floor plans with live preview.
 
   
 
@@ -220,7 +220,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
 
   
-2. Install **[Smart Map Settings Widget](https://labcase.softwareag.com/projects/smart-map-settings/repository/revisions/master/entry/smart-map-settings/README.md)** for indoor configuration.
+2. Install **[Smart Map Settings Widget](https://github.com/SoftwareAG/cumulocity-smart-map-settings-widget)** for indoor configuration.
 
 
   
@@ -239,7 +239,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
     ```
         
-    npm i <binary file path>/gp-smart-map-1.2.0.tgz
+    npm i <binary file path>/gp-smart-map-x.x.x.tgz
 
     ```
 
@@ -369,7 +369,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
   
 
-2. Install **[Smart Map Settings Widget](https://labcase.softwareag.com/projects/smart-map-settings/repository/revisions/master/entry/smart-map-settings/README.md)** for indoor configuration.
+2. Install **[Smart Map Settings Widget](https://github.com/SoftwareAG/cumulocity-smart-map-settings-widget)** for indoor configuration.
 
   
 
@@ -389,7 +389,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
     ```
 
-    npm i <binary file path>/gp-smart-map-1.2.0.tgz
+    npm i <binary file path>/gp-smart-map-x.x.x.tgz
 
     ```
 
@@ -554,7 +554,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
   
     ```
-    cd gp-smart-map-project
+    cd cumulocity-smart-map-widget
 
     ```
 
@@ -565,7 +565,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
   
 
     ```
-    git checkout v1.0.0
+    git checkout <your version>
 
     ```
 
