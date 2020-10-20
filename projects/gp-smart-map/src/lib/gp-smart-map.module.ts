@@ -19,14 +19,9 @@ import { NgModule } from '@angular/core';
 import { Commonc8yService } from './common/c8y/commonc8y.service';
 import { CoreModule, HOOK_COMPONENTS} from '@c8y/ngx-components';
 import { INIT_COORDS } from './common/tokens';
-import {
-  MatPaginatorModule, MatFormFieldModule, MatInputModule, MatDividerModule,
-  MatProgressBarModule, MatButtonModule, MatSortModule, MatSlideToggleModule,
-  MatDialogModule, MatSelectModule, MatButtonToggleModule, MatDatepickerModule,
-  MatNativeDateModule, MatMenuModule, MatIconModule, MatSliderModule
-} from '@angular/material';
-import { MatTableModule } from '@angular/material/table';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import '~styles/index.css';
+
 import { AngularResizedEventModule } from 'angular-resize-event';
 import { MovingMarkerService } from './common/movingMarker.service';
 import { HeatLayerService } from './common/heatLayer.service';
@@ -36,22 +31,31 @@ import * as preview from './preview-image';
 import { ImageRotateService } from './common/imageRotate.service';
 import { AppIdService } from './common/app-id.service';
 import { GPSmartMapPopupComponent } from './component/gp-smart-map-popup.component';
+
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSliderModule } from '@angular/material/slider';
+
+
 @NgModule({
   declarations: [GPSmartMapComponent, GPSmartMapConfigComponent, GPSmartMapPopupComponent],
   imports: [
     CoreModule,
-    MatTableModule,
-    MatPaginatorModule,
-    BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSortModule,
     MatButtonModule,
     MatDialogModule,
-    MatSelectModule,
     MatProgressBarModule,
     MatButtonToggleModule,
-    MatMenuModule,
     MatIconModule,
     MatDatepickerModule,
     MatNativeDateModule,
