@@ -1,5 +1,5 @@
 
-# Smart Map Widget for Cumulocity
+# Smart Map Widget for Cumulocity[<img width="35" src="https://user-images.githubusercontent.com/67993842/97668428-f360cc80-1aa7-11eb-8801-da578bda4334.png"/>](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/1.0.0/smartmap-runtime-widget-1.0.0.zip)
 
   
 
@@ -122,7 +122,11 @@ The Smart Map widget help you to track real-time device locations in indoor with
 ## Installation
 
   
+### Runtime Widget Deployment?
 
+* This widget support runtime deployment. Download [Runtime Binary](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/1.0.0/smartmap-runtime-widget-1.0.0.zip) and follow runtime deployment instructions from [here](https://github.com/SoftwareAG/cumulocity-runtime-widget-loader).
+
+### Installation of widget through Appbuilder or Cockipt Deployment?
   
 
 **Supported Cumulocity Environments:**
