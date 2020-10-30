@@ -20,8 +20,6 @@ import { Commonc8yService } from './common/c8y/commonc8y.service';
 import { CoreModule, HOOK_COMPONENTS} from '@c8y/ngx-components';
 import { INIT_COORDS } from './common/tokens';
 
-import '~styles/index.css';
-
 import { AngularResizedEventModule } from 'angular-resize-event';
 import { MovingMarkerService } from './common/movingMarker.service';
 import { HeatLayerService } from './common/heatLayer.service';

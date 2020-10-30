@@ -83,6 +83,7 @@
     "url-loader": "^4.1.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
-    "webpack-external-import": "^2.2.3"
+    "webpack-external-import": "^2.2.3",
+    "gulp-inject-string": "^1.1.2"
   }
 }

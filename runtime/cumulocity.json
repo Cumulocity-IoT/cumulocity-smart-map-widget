@@ -4,7 +4,7 @@
   "key": "smartmap-runtime-widget-application-key",
   "contentSecurityPolicy": "default-src 'self'",
   "icon": {
-    "class": "fa fa-puzzle-piece"
+    "class": "fa fa-map-marker"
   },
   "manifest": {
     "noAppSwitcher": true
