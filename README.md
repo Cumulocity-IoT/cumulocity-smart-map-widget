@@ -1,5 +1,5 @@
 
-# Smart Map Widget for Cumulocity[<img width="35" src="https://user-images.githubusercontent.com/67993842/97668428-f360cc80-1aa7-11eb-8801-da578bda4334.png"/>](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/1.0.0/smartmap-runtime-widget-1.0.0.zip)
+# Smart Map Widget for Cumulocity[<img width="35" src="https://user-images.githubusercontent.com/67993842/97668428-f360cc80-1aa7-11eb-8801-da578bda4334.png"/>](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/1.0.1/smartmap-runtime-widget-1.0.1.zip)
 
   
 
@@ -124,7 +124,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
   
 ### Runtime Widget Deployment?
 
-* This widget support runtime deployment. Download [Runtime Binary](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/1.0.0/smartmap-runtime-widget-1.0.0.zip) and follow runtime deployment instructions from [here](https://github.com/SoftwareAG/cumulocity-runtime-widget-loader).
+* This widget support runtime deployment. Download [Runtime Binary](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/1.0.1/smartmap-runtime-widget-1.0.1.zip) and follow runtime deployment instructions from [here](https://github.com/SoftwareAG/cumulocity-runtime-widget-loader).
 
 ### Installation of widget through Appbuilder or Cockipt Deployment?
   
@@ -229,7 +229,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
   
 
-3. Grab the Smart Map **[Latest Release Binary](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/1.0.0/gp-smart-map-1.0.0.tgz)**.
+3. Grab the Smart Map **[Latest Release Binary](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/1.0.1/gp-smart-map-1.0.1.tgz)**.
 
   
 
@@ -251,7 +251,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
   
 
-5. Copy smart-map.css file [from here](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/1.0.0/smart-map.css) and paste it at /cumulocity-app-builder/ui-assets/
+5. Copy smart-map.css file [from here](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/1.0.1/smart-map.css) and paste it at /cumulocity-app-builder/ui-assets/
 
 
     **Note**: Ignore this step if file is already copied during smart map settings installation
@@ -379,7 +379,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
   
 
-3. Grab the Smart Map **[Latest Release Binary](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/1.0.0/gp-smart-map-1.0.0.tgz)**
+3. Grab the Smart Map **[Latest Release Binary](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/1.0.1/gp-smart-map-1.0.1.tgz)**
 
   
 
@@ -399,7 +399,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
     
 
-5. Copy smart-map.css file [from here](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/1.0.0/smart-map.css) and paste it at /cumulocity-app/branding/
+5. Copy smart-map.css file [from here](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/1.0.1/smart-map.css) and paste it at /cumulocity-app/branding/
 
 
     **Note**: Ignore this step if file is already copied during smart map settings installation
