@@ -1,0 +1,11 @@
+{
+  "name": "smartmap-runtime-widget",
+  "interleave": {
+    "dist\\bundle-src\\custom-widget.js": "smartmap-runtime-widget-CustomWidget",
+    "dist/bundle-src/custom-widget.js": "smartmap-runtime-widget-CustomWidget"
+  },
+  "version": "1.0.1",
+  "description": "Runtime package.json for library widget (written by Software AG Global Presales)",
+  "author": "Darpankumar Lalani - Software AG, Global Presales",
+  "license": "Apache 2.0"
+}

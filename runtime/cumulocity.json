@@ -1,0 +1,12 @@
+{
+  "name": "Smart map Runtime Widget",
+  "contextPath": "smartmap-runtime-widget",
+  "key": "smartmap-runtime-widget-application-key",
+  "contentSecurityPolicy": "default-src 'self'",
+  "icon": {
+    "class": "fa fa-map-marker"
+  },
+  "manifest": {
+    "noAppSwitcher": true
+  }
+}

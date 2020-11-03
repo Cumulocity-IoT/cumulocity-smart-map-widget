@@ -1,0 +1,15 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "assets": [
+    "styles/**/*"
+  ],
+  "lib": {
+    "entryFile": "../projects/gp-smart-map/src/public-api.ts",
+    "umdModuleIds": {
+      "@c8y/ngx-components": "@c8y/ngx-components"
+    },
+    "flatModuleFile": "custom-widget"
+  },
+  "whitelistedNonPeerDependencies": ["."],
+  "dest": "dist/widget-library"
+}
