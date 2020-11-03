@@ -8,7 +8,7 @@ const execSync = require('child_process').execSync;
 const replace = require('gulp-replace');
 const path = require('path');
 const inject = require('gulp-inject-string');
-const pkgJson = require('./dist/widget-library/package.json');
+const pkgJson = require('./package.json');
 
 function clean() {
     return del(['dist']);
