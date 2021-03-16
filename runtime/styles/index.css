@@ -83,6 +83,7 @@
     margin-top: -35px !important;
     display: block;
     margin-left: -2px !important;
+    width: 35px;
 }
 
 .leaflet-top,
