@@ -77,10 +77,10 @@
 
 /* Location tracking css end */
 
-.extra-marker i.fa {
-    margin-top: -35px;
+.extra-marker i.fa-sm {
+    margin-top: -35px !important;
     display: block;
-    margin-left: 7px;
+    margin-left: -2px !important;
 }
 
 .leaflet-top,

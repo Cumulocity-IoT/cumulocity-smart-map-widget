@@ -759,7 +759,7 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
      * Not Applicable for Hybrid map
      */
     private getChildLocationEventAndUpdateTime() {
-        return new Promise(
+        return new Promise<void>(
             (resolve, reject) => {
                 if (this.loadChildDevices && this.mapType !== 'Hybrid') {
                     const deviceEventType = this.locationEventType.split(',').map(value => value.trim());
@@ -1180,7 +1180,7 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
         const iconMarker = L.ExtraMarkers.icon({
             icon: this.__getIconForType(mo.type),
             iconColor: '#fff',
-            extraClasses: 'fa-lg',
+            extraClasses: 'fa-sm',
             markerColor: this.__getColorForType(mo.type),
             shape: (isBeacon ? 'square' : 'circle'),
             svg: 'false',
