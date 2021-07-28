@@ -8,7 +8,7 @@
            <label for="MapType" class=" col-sm-4 control-label">Map Type:</label>
            <div class="col-sm-8">
              <select class=" form-control" [(ngModel)]="config.mapType" name="MapType"
-               (change)='onMapOptionsSelected($event)' id="MapType">
+               (change)='onMapOptionsSelected($event)' id="MapType" ngDefaultControl >
                <option value="OutDoor" selected>Outdoor Map</option>
                <option value="InDoor" >Indoor Map</option>
                <option value="Hybrid" >Hybrid(Indoor/Outdoor) Map</option>
@@ -22,195 +22,226 @@
         </div>
       </div>
       <div *ngIf="config.mapType !== 'HeatMap' && config.mapType !== 'ClusterMap'">
-      <div class="row" >
-        <div class="col-sm-12 form-horizontal">
-          <div class="col-sm-12 form-group">
-            <label for="FragmentTypeSelect" class=" col-sm-4 control-label">Asset Type:</label>
-            <div class="col-sm-8">
-              <select class=" form-control" [(ngModel)]="config.floorFragmentTypes"
-                name="FragmentTypeSelect" id="FragmentTypeSelect">
-                <option value="" selected></option>
-                <option *ngFor="let type of floorFragmentTypes" [value]="type">
-                  {{type}}
-                </option>
-              </select>
+        <div class="row" >
+          <div class="col-sm-12 form-horizontal">
+            <div class="col-sm-12 form-group">
+              <label for="FragmentTypeSelect1" class=" col-sm-4 control-label">Asset Type:</label>
+              <div class="col-sm-8">
+                <select class=" form-control" [(ngModel)]="config.floorFragmentTypes"
+                  name="FragmentTypeSelect1" id="FragmentTypeSelect1" ngDefaultControl>
+                  <option value="" selected></option>
+                  <option *ngFor="let type of floorFragmentTypes" [value]="type">
+                    {{type}}
+                  </option>
+                </select>
+              </div>
             </div>
-          </div>
-         </div>
-      </div>
-    </div>
-    <div *ngIf="config.mapType === 'InDoor' || config.mapType === 'Hybrid'">
-      <div class="row">
-        <div class="col-sm-12 form-horizontal">
-          <div class="col-sm-12 form-group">
-            <label for="BeaconGroupId" class="col-sm-4 control-label">Infra Group ID:</label>
-            <div class="col-sm-8">
-              <input type="text" [(ngModel)]="config.beaconGroupId" id="BeaconGroupId" class="form-control"
-                placeholder="100001">
-            </div>
-          </div>
-          </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-12 form-horizontal">
-          <div class="col-sm-12 form-group">
-            <label for="FragmentTypeSelect" class=" col-sm-4 control-label">Display Mode:</label>
-            <div class="col-sm-8">
-              <select class=" form-control" [(ngModel)]="config.selectedMarkerToggleValue"
-                name="FragmentTypeSelect" id="FragmentTypeSelect">
-                <option value="All" selected>All</option>
-                <option value="Beacons" >Only Infrastructure</option>
-                <option value="Devices" >Only Devices</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div *ngIf="config.mapType === 'Hybrid'">
-      <div class="row">
-        <div class="col-sm-12 form-horizontal">
-          <div class="col-sm-12 form-group">
-            <label for="deviceTagId" class=" col-sm-4 control-label">Indoor Tracker ID:</label>
-            <div class="col-sm-8">
-              <input type="text" [(ngModel)]="config.deviceTagId"  id="deviceTagId"
-                class="form-control"
-               placeholder="1000001">
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-12 form-horizontal">
-          <div class="col-sm-12 form-group">
-            <label for="GPSTrackerId" class=" col-sm-4 control-label">Outdoor Tracker ID:</label>
-            <div class="col-sm-8">
-              <input type="text" [(ngModel)]="config.GPSTrackerId" id="GPSTrackerId"
-                class="form-control"
-                placeholder="1000001">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div *ngIf="config.mapType === 'InDoorHeatMap' || config.mapType === 'HeatMap' || config.mapType === 'Hybrid'">
-      <div class="row">
-        <div class="col-sm-12 form-horizontal">
-          <div class="col-sm-12 form-group">
-            <label for="heatMapEventType" class=" col-sm-4 control-label">Location Event Type(s):</label>
-            <div class="col-sm-8">
-              <input type="text" [(ngModel)]="config.locationEventType" id="locationEventType" class="form-control"
-                placeholder="c8y_LocationUpdate,c8y_BeaconLocationUpdate">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div *ngIf="config.mapType === 'InDoorHeatMap' || config.mapType === 'HeatMap'">
-      <div class="row">
-        <div class="col-sm-12 form-horizontal">
-          <div class="col-sm-12 form-group">
-            <label for="HeatMapQuantity" class=" col-sm-4 control-label">HeatMap Event Quantity:</label>
-            <div class="col-sm-8">
-              <input type="text" [(ngModel)]="config.heatMapQuantity" id="HeatMapQuantity" class="form-control"
-                placeholder="Quantity field(Optional)">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div *ngIf="config.mapType === 'InDoorHeatMap' || config.mapType === 'HeatMap'">
-      <div class="row">
-        <div class="col-sm-12 form-horizontal">
-          <div class="col-sm-12 form-group">
-            <label for="HeatMapQuantity" class=" col-sm-4 control-label">HeatMap Intensity Legends:</label>
-            <div class="col-sm-8">
-              <span class="lt-heat-legend-low-config"></span>
-              <span class="lt-heat-legend-config">
-                <input type="text" [(ngModel)]="config.heatMapLegendLow" id="heatMapLegendLow"
-                  class="form-control" placeholder="Low">
-              </span>
-              <span class="lt-heat-legend-medium-config"></span>
-              <span class="lt-heat-legend-config">
-                <input type="text" [(ngModel)]="config.heatMapLegendMedium" id="heatMapLegendMedium"
-                  class="form-control" placeholder="Medium">
-              </span>
-              <span class="lt-heat-legend-high-config"></span>
-              <span class="lt-heat-legend-config">
-                <input type="text" [(ngModel)]="config.heatMapLegendHigh" id="heatMapLegendHigh"
-                  class="form-control" placeholder="High">
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-     <div *ngIf="appId && config.mapType !== 'InDoorHeatMap' && config.mapType !== 'HeatMap'">
-       <div class="row">
-         <div class="col-sm-12 form-horizontal">
-           <div class="col-sm-12 form-group">
-             <label for="dashboardField" class=" col-sm-4 control-label">Dashboard Field:</label>
-             <div class="col-sm-8">
-               <input type="text" [(ngModel)]="config.dashboardField" id="dashboardField" class="form-control"
-                 placeholder="deviceListDynamicDashboards.dashboardId(Optional)">
-             </div>
            </div>
-         </div>
-       </div>
-     </div>
-     <div *ngIf="appId && config.mapType !== 'InDoorHeatMap' && config.mapType !== 'HeatMap'">
-       <div class="row">
-         <div class="col-sm-12 form-horizontal">
-           <div class="col-sm-12 form-group">
-             <label for="tabGroupField" class=" col-sm-4 control-label">TabGroup Field:</label>
-             <div class="col-sm-8">
-               <input type="text" [(ngModel)]="config.tabGroupField" id="tabGroupField" class="form-control"
-                 placeholder="deviceListDynamicDashboards.tabGroup(Optional)">
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
+        </div>
+      </div>
+      <div *ngIf="config.mapType === 'InDoor' || config.mapType === 'Hybrid'">
+        <div class="row">
+          <div class="col-sm-12 form-horizontal">
+            <div class="col-sm-12 form-group">
+              <label for="BeaconGroupId" class="col-sm-4 control-label">Infra Group ID:</label>
+              <div class="col-sm-8">
+                <input type="text" [(ngModel)]="config.beaconGroupId" id="BeaconGroupId" class="form-control"
+                  placeholder="100001">
+              </div>
+            </div>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 form-horizontal">
+            <div class="col-sm-12 form-group">
+              <label for="displayMode" class=" col-sm-4 control-label">Display Mode:</label>
+              <div class="col-sm-8">
+                <select class=" form-control" [(ngModel)]="config.selectedMarkerToggleValue"
+                  name="displayMode" id="displayMode">
+                  <option value="All" selected>All</option>
+                  <option value="Beacons" >Only Infrastructure</option>
+                  <option value="Devices" >Only Devices</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="config.mapType === 'Hybrid'">
+        <div class="row">
+          <div class="col-sm-12 form-horizontal">
+            <div class="col-sm-12 form-group">
+              <label for="deviceTagId" class=" col-sm-4 control-label">Indoor Tracker ID:</label>
+              <div class="col-sm-8">
+                <input type="text" [(ngModel)]="config.deviceTagId"  id="deviceTagId"
+                  class="form-control"
+                 placeholder="1000001">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 form-horizontal">
+            <div class="col-sm-12 form-group">
+              <label for="GPSTrackerId" class=" col-sm-4 control-label">Outdoor Tracker ID:</label>
+              <div class="col-sm-8">
+                <input type="text" [(ngModel)]="config.GPSTrackerId" id="GPSTrackerId"
+                  class="form-control"
+                  placeholder="1000001">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="config.mapType === 'InDoorHeatMap' || config.mapType === 'HeatMap' || config.mapType === 'Hybrid'">
+        <div class="row">
+          <div class="col-sm-12 form-horizontal">
+            <div class="col-sm-12 form-group">
+              <label for="heatMapEventType" class=" col-sm-4 control-label">Location Event Type(s):</label>
+              <div class="col-sm-8">
+                <input type="text" [(ngModel)]="config.locationEventType" id="locationEventType" class="form-control"
+                  placeholder="c8y_LocationUpdate,c8y_BeaconLocationUpdate">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="config.mapType === 'InDoorHeatMap' || config.mapType === 'HeatMap'">
+        <div class="row">
+          <div class="col-sm-12 form-horizontal">
+            <div class="col-sm-12 form-group">
+              <label for="HeatMapQuantity" class=" col-sm-4 control-label">HeatMap Event Quantity:</label>
+              <div class="col-sm-8">
+                <input type="text" [(ngModel)]="config.heatMapQuantity" id="HeatMapQuantity" class="form-control"
+                  placeholder="Quantity field(Optional)">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="config.mapType === 'InDoorHeatMap' || config.mapType === 'HeatMap'">
+        <div class="row">
+          <div class="col-sm-12 form-horizontal">
+            <div class="col-sm-12 form-group">
+              <label for="HeatMapQuantity" class=" col-sm-4 control-label">HeatMap Intensity Legends:</label>
+              <div class="col-sm-8">
+                <span class="lt-heat-legend-low-config"></span>
+                <span class="lt-heat-legend-config">
+                  <input type="text" [(ngModel)]="config.heatMapLegendLow" id="heatMapLegendLow"
+                    class="form-control" placeholder="Low">
+                </span>
+                <span class="lt-heat-legend-medium-config"></span>
+                <span class="lt-heat-legend-config">
+                  <input type="text" [(ngModel)]="config.heatMapLegendMedium" id="heatMapLegendMedium"
+                    class="form-control" placeholder="Medium">
+                </span>
+                <span class="lt-heat-legend-high-config"></span>
+                <span class="lt-heat-legend-config">
+                  <input type="text" [(ngModel)]="config.heatMapLegendHigh" id="heatMapLegendHigh"
+                    class="form-control" placeholder="High">
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="appId && config.mapType !== 'InDoorHeatMap' && config.mapType !== 'HeatMap'">
+        <div class="row">
+          <div class="col-sm-12 form-horizontal">
+            <div class="col-sm-12 form-group">
+              <label for="dashboardField" class=" col-sm-4 control-label">Dashboard Field:</label>
+              <div class="col-sm-8">
+                <input type="text" [(ngModel)]="config.dashboardField" id="dashboardField" class="form-control"
+                  placeholder="deviceListDynamicDashboards.dashboardId(Optional)">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="appId && config.mapType !== 'InDoorHeatMap' && config.mapType !== 'HeatMap'">
+        <div class="row">
+          <div class="col-sm-12 form-horizontal">
+            <div class="col-sm-12 form-group">
+              <label for="tabGroupField" class=" col-sm-4 control-label">TabGroup Field:</label>
+              <div class="col-sm-8">
+                <input type="text" [(ngModel)]="config.tabGroupField" id="tabGroupField" class="form-control"
+                  placeholder="deviceListDynamicDashboards.tabGroup(Optional)">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="row">
         <div class="col-sm-12 form-horizontal">
           <label class="mb-2 ltc-title-label">Advance Configuration</label>
           <div class="col-sm-6 ">
-            <div class="slide-toggle input-width">
+            <!-- <div class="slide-toggle input-width">
               <mat-slide-toggle class="col-sm-12 slide-toggle-margin" [checked]="config.followDevice"
                 [(ngModel)]="config.followDevice" [disabled]='config.mapType === "InDoorHeatMap" || config.mapType ===
-                "HeatMap"'>
+                "HeatMap"' ngDefaultControl>
                 Follow Device
               </mat-slide-toggle>
-            </div>
+            </div> -->
+            <div class="btn-group ">
+              <label class="c8y-switch ">
+                  <input type="checkbox" [checked]="config.followDevice" 
+                  [(ngModel)]="config.followDevice" [disabled]='config.mapType === "InDoorHeatMap" || config.mapType ===
+                "HeatMap"'>
+                  <span></span>Follow Device
+                </label>
+             </div>
           </div>
           <div class="col-sm-6 ">
-            <div class="slide-toggle input-width">
+            <!-- <div class="slide-toggle input-width">
               <mat-slide-toggle class="col-sm-12 slide-toggle-margin" [checked]="config.isGeofence"
-                [(ngModel)]="config.isGeofence" >
+                [(ngModel)]="config.isGeofence" ngDefaultControl>
                 Geofence
               </mat-slide-toggle>
-            </div>
+            </div> -->
+            <div class="btn-group ">
+              <label class="c8y-switch ">
+                  <input type="checkbox" [checked]="config.isGeofence" 
+                  [(ngModel)]="config.isGeofence" >
+                  <span></span>Geofence
+                </label>
+             </div>
           </div>
       </div>
     </div>
+
     <div class="row">
       <div class="col-sm-12 form-horizontal">
           <div class="col-sm-6 ">
-            <div class="slide-toggle input-width">
+            <!-- <div class="slide-toggle input-width">
               <mat-slide-toggle class="col-sm-12 slide-toggle-margin" [checked]="config.loadChildDevices"
-                [(ngModel)]="config.loadChildDevices" [disabled]='config.mapType === "Hybrid"'>
+                [(ngModel)]="config.loadChildDevices" ngDefaultControl [disabled]='config.mapType === "Hybrid"'>
                 Include Child Devices
               </mat-slide-toggle>
-            </div>
+            </div> -->
+            <div class="btn-group ">
+              <label class="c8y-switch ">
+                  <input type="checkbox" [checked]="config.loadChildDevices" 
+                  [(ngModel)]="config.loadChildDevices" [disabled]='config.mapType === "Hybrid"'>
+                  <span></span>Include Child Devices
+                </label>
+             </div>
           </div>
           <div class="col-sm-6 ">
-            <div class="slide-toggle input-width">
+            <!-- <div class="slide-toggle input-width">
               <mat-slide-toggle class="col-sm-12 slide-toggle-margin" [checked]="config.isLastEventHeatmap"
-                [(ngModel)]="config.isLastEventHeatmap" [disabled]='config.mapType !== "InDoorHeatMap" && config.mapType
+                [(ngModel)]="config.isLastEventHeatmap" ngDefaultControl [disabled]='config.mapType !== "InDoorHeatMap" && config.mapType
                 !== "HeatMap"'>
                 Heat Map - Last Event Only
               </mat-slide-toggle>
-            </div>
+            </div> -->
+            <div class="btn-group ">
+              <label class="c8y-switch ">
+                  <input type="checkbox" [checked]="config.isLastEventHeatmap" 
+                  [(ngModel)]="config.isLastEventHeatmap" [disabled]='config.mapType !== "InDoorHeatMap" && config.mapType
+                  !== "HeatMap"'>
+                  <span></span>Heat Map - Last Event Only
+                </label>
+             </div>
           </div>
         </div>
       </div>
@@ -221,14 +252,21 @@
             <label class=" col-sm-4 control-label">Default Zoom:</label>
             <div class="col-sm-8">
               <div class="col-sm-4">
-                <mat-slide-toggle class="slide-toggle-margin" [checked]="config.isOutdoorAutoZoom"
-                  [(ngModel)]="config.isOutdoorAutoZoom" (change)="outdoorAutoChanges($event)">
+               <!--  <mat-slide-toggle class="slide-toggle-margin" [checked]="config.isOutdoorAutoZoom"
+                  [(ngModel)]="config.isOutdoorAutoZoom" ngDefaultControl (change)="outdoorAutoChanges($event)">
                   Auto
-                </mat-slide-toggle>
+                </mat-slide-toggle> -->
+                <div class="btn-group ">
+                  <label class="c8y-switch ">
+                      <input type="checkbox" [checked]="config.isOutdoorAutoZoom" 
+                      [(ngModel)]="config.isOutdoorAutoZoom" (change)="outdoorAutoChanges($event)">
+                      <span></span>Auto
+                    </label>
+                 </div>
               </div>
               <div class="col-sm-8" *ngIf="!config.isOutdoorAutoZoom">
                    <mat-slider [max]="21" [min]="1" [step]="1" [thumbLabel]="true" [tickInterval]="1"
-                     [(ngModel)]="config.outdoorZoom">
+                     [(ngModel)]="config.outdoorZoom" >
                    </mat-slider>
               </div>
             </div>
@@ -242,14 +280,21 @@
              <label class=" col-sm-4 control-label">Default Indoor Zoom:</label>
              <div class="col-sm-8">
                <div class="col-sm-4">
-                  <mat-slide-toggle class="slide-toggle-margin" [checked]="config.isIndoorAutoZoom"
-                    [(ngModel)]="config.isIndoorAutoZoom" (change)="indoorAutoChanges($event)">
+                 <!--  <mat-slide-toggle class="slide-toggle-margin" [checked]="config.isIndoorAutoZoom"
+                    [(ngModel)]="config.isIndoorAutoZoom" ngDefaultControl (change)="indoorAutoChanges($event)">
                     Auto
-                  </mat-slide-toggle>
+                  </mat-slide-toggle> -->
+                  <div class="btn-group ">
+                    <label class="c8y-switch ">
+                        <input type="checkbox" [checked]="config.isIndoorAutoZoom" 
+                        [(ngModel)]="config.isIndoorAutoZoom" (change)="indoorAutoChanges($event)">
+                        <span></span>Auto
+                      </label>
+                   </div>
                </div>
                <div class="col-sm-8" *ngIf="!config.isIndoorAutoZoom">
                    <mat-slider [max]="28" [min]="10" [step]="0.5" [thumbLabel]="true" [tickInterval]="1"
-                     [(ngModel)]="config.indoorZoom">
+                     [(ngModel)]="config.indoorZoom" >
                    </mat-slider>
                </div>
              </div>
@@ -263,14 +308,21 @@
              <label class=" col-sm-4 control-label">Heat Map Event Intensity:</label>
              <div class="col-sm-8">
                <div class="col-sm-4">
-                 <mat-slide-toggle class="slide-toggle-margin" [checked]="config.isHeatmapAutoIntensity"
-                   [(ngModel)]="config.isHeatmapAutoIntensity" (change)="heatMapIntensityAutoChanges($event)">
+                <!--  <mat-slide-toggle class="slide-toggle-margin" [checked]="config.isHeatmapAutoIntensity"
+                   [(ngModel)]="config.isHeatmapAutoIntensity" ngDefaultControl (change)="heatMapIntensityAutoChanges($event)">
                    Auto
-                 </mat-slide-toggle>
+                 </mat-slide-toggle> -->
+                 <div class="btn-group ">
+                  <label class="c8y-switch ">
+                      <input type="checkbox" [checked]="config.isHeatmapAutoIntensity" 
+                      [(ngModel)]="config.isHeatmapAutoIntensity" (change)="heatMapIntensityAutoChanges($event)">
+                      <span></span>Auto
+                    </label>
+                 </div>
                </div>
                <div class="col-sm-8" *ngIf="!config.isHeatmapAutoIntensity">
                  <mat-slider [max]="20" [min]="1" [step]="1" [thumbLabel]="true" [tickInterval]="1"
-                   [(ngModel)]="config.heatIntensityPerEvent">
+                   [(ngModel)]="config.heatIntensityPerEvent" >
                  </mat-slider>
                </div>
              </div>

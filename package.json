@@ -1,6 +1,6 @@
 {
   "name": "gp-smart-map-project",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "The Smart Map widget help you to track real-time device locations in indoor with multi floor infrastructure as well as in outdoor. Smart Map also support real-time Heat map for Indoor and outdoor location events.",
   "author": "Darpankumar Lalani - Software AG, Global Presales",
   "license": "Apache 2.0",

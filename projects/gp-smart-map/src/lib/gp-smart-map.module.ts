@@ -57,7 +57,6 @@ import { MatSliderModule } from '@angular/material/slider';
     MatIconModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSlideToggleModule,
     MatSliderModule,
     AngularResizedEventModule
   ],

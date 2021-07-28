@@ -28,7 +28,7 @@ import { AppIdService } from '../common/app-id.service';
   styleUrls: ['./gp-smart-map.config.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class GPSmartMapConfigComponent implements OnInit, OnChanges, OnDestroy {
+export class GPSmartMapConfigComponent implements OnInit, OnDestroy {
 
   @Input() config: any = {};
   floorFragmentTypes = null;
@@ -115,10 +115,10 @@ export class GPSmartMapConfigComponent implements OnInit, OnChanges, OnDestroy {
     this.config.dashboardField = '';
     this.config.isLastEventHeatmap = true;
   }
-  // for development purpose only
+ /*  // for development purpose only
   ngOnChanges(changes: SimpleChanges): void {
     if (isDevMode()) { console.log('+-+- changes detected..', changes); }
-  }
+  } */
 
   ngOnDestroy(): void {
     if (isDevMode()) { console.log('+-+- destroying..'); }
