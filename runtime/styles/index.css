@@ -2,6 +2,7 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 @import '~leaflet2/dist/leaflet.css';
 @import '~leaflet-draw/dist/leaflet.draw.css';
+@import '~leaflet-extra-markers/dist/css/leaflet.extra-markers.min.css';
 @import '~leaflet.markercluster/dist/MarkerCluster.css';
 @import '~leaflet.markercluster/dist/MarkerCluster.Default.css';
 
