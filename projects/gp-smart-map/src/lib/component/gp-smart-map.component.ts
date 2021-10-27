@@ -201,7 +201,7 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
     }
     private reloadMap(isFirstCall) {
         if (isDevMode() && !isAppBuilderMode) {
-            this.deviceId = '2421100'; // '1606'; // '592216'; // '78205'; // '3300'; // '25796'; // '261760'; // '914357';
+            this.deviceId = '2693692'; // '1606'; // '592216'; // '78205'; // '3300'; // '25796'; // '261760'; // '914357';
             this.beaconGroupId = ''; // '25799'; // '3949';
             this.rootLong = 0; // 8.637085;
             this.rootLat = 0; // 49.814334;
@@ -216,8 +216,8 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
             this.isGeofence = false;
             this.isHeatMap = false;
             this.heatMapQuantity = '';
-            this.mapType = 'InDoorHeatMap';
-            this.loadChildDevices = false;
+            this.mapType = 'OutDoor';
+            this.loadChildDevices = true;
             this.dashboardField = '';
         }
         if (isAppBuilderMode) {
@@ -506,6 +506,13 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
                                                 this.updateDeviceMatrix(childObj.managedObject.id, element.id, false, true);
                                             });
                                         }
+                                        if (element.childDevices && element.childAssets.references) {
+                                            const childAssets = element.childAssets.references;
+                                            childAssets.forEach(childObj => {
+                                                this.devicesToGetChildList.push(childObj.managedObject.id);
+                                                this.updateDeviceMatrix(childObj.managedObject.id, element.id, false, true);
+                                            });
+                                        }
                                     }
                                 });
                                 this.allDeviceList.push.apply(this.allDeviceList, deviceList);
@@ -530,6 +537,13 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
                             if (mo.childDevices && mo.childDevices.references) {
                                 const childDevices = mo.childDevices.references;
                                 childDevices.forEach(childObj => {
+                                    this.devicesToGetChildList.push(childObj.managedObject.id);
+                                    this.updateDeviceMatrix(childObj.managedObject.id, mo.id, false, true);
+                                });
+                            }
+                            if (mo.childDevices && mo.childAssets.references) {
+                                const childAssets = mo.childAssets.references;
+                                childAssets.forEach(childObj => {
                                     this.devicesToGetChildList.push(childObj.managedObject.id);
                                     this.updateDeviceMatrix(childObj.managedObject.id, mo.id, false, true);
                                 });
@@ -1251,7 +1265,7 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
         let ppContent = '';
         for (const elem of elems) {
             ppContent = ppContent +
-                `<div class="lt-popup-row"><label class="">${elem.label}</label><div class="">${elem.value}</div></div>`;
+                `<div class="lt-popup-row"><label class="">${elem.label}</label><div class="" title="${elem.value}">${elem.value}</div></div>`;
         }
         return ppContent;
     }

@@ -43,8 +43,11 @@
 
 .lt-popup-row div {
     /* flex: 2; */
-    flex: none;
-    color: #fff
+    /* flex: none; */
+    color: #fff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .lt-actions-row {
