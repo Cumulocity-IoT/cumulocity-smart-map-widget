@@ -60,7 +60,7 @@
                   name="displayMode" id="displayMode">
                   <option value="All" selected>All</option>
                   <option value="Beacons" >Only Infrastructure</option>
-                  <option value="Devices" >Only Devices</option>
+                  <option value="Devices" >Only Assets/Devices</option>
                 </select>
               </div>
             </div>
@@ -180,7 +180,7 @@
                   <input type="checkbox" [checked]="config.followDevice" 
                   [(ngModel)]="config.followDevice" [disabled]='config.mapType === "InDoorHeatMap" || config.mapType ===
                 "HeatMap"'>
-                  <span></span>Follow Device
+                  <span></span>Follow Asset/Device
                 </label>
              </div>
           </div>
@@ -203,7 +203,7 @@
               <label class="c8y-switch ">
                   <input type="checkbox" [checked]="config.loadChildDevices" 
                   [(ngModel)]="config.loadChildDevices" [disabled]='config.mapType === "Hybrid"'>
-                  <span></span>Include Child Devices
+                  <span></span>Include Child Assets/Devices
                 </label>
              </div>
           </div>

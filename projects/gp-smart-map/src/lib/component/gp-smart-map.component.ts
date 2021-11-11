@@ -508,6 +508,13 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
                                                 this.updateDeviceMatrix(childObj.managedObject.id, element.id, false, true);
                                             });
                                         }
+                                        if (element.childDevices && element.childAssets.references) {
+                                            const childAssets = element.childAssets.references;
+                                            childAssets.forEach(childObj => {
+                                                this.devicesToGetChildList.push(childObj.managedObject.id);
+                                                this.updateDeviceMatrix(childObj.managedObject.id, element.id, false, true);
+                                            });
+                                        }
                                     }
                                 });
                                 this.allDeviceList.push.apply(this.allDeviceList, deviceList);
@@ -532,6 +539,13 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
                             if (mo.childDevices && mo.childDevices.references) {
                                 const childDevices = mo.childDevices.references;
                                 childDevices.forEach(childObj => {
+                                    this.devicesToGetChildList.push(childObj.managedObject.id);
+                                    this.updateDeviceMatrix(childObj.managedObject.id, mo.id, false, true);
+                                });
+                            }
+                            if (mo.childDevices && mo.childAssets.references) {
+                                const childAssets = mo.childAssets.references;
+                                childAssets.forEach(childObj => {
                                     this.devicesToGetChildList.push(childObj.managedObject.id);
                                     this.updateDeviceMatrix(childObj.managedObject.id, mo.id, false, true);
                                 });
@@ -1259,7 +1273,7 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
         let ppContent = '';
         for (const elem of elems) {
             ppContent = ppContent +
-                `<div class="lt-popup-row"><label class="">${elem.label}</label><div class="">${elem.value}</div></div>`;
+                `<div class="lt-popup-row"><label class="">${elem.label}</label><div class="" title="${elem.value}">${elem.value}</div></div>`;
         }
         return ppContent;
     }
