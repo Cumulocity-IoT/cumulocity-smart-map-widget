@@ -31,34 +31,16 @@ import { AppIdService } from './common/app-id.service';
 import { GPSmartMapPopupComponent } from './component/gp-smart-map-popup.component';
 
 
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatIconModule } from '@angular/material/icon';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatSliderModule } from '@angular/material/slider';
-
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   declarations: [GPSmartMapComponent, GPSmartMapConfigComponent, GPSmartMapPopupComponent],
   imports: [
     CoreModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
     MatDialogModule,
-    MatProgressBarModule,
-    MatButtonToggleModule,
-    MatIconModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatSliderModule,
-    AngularResizedEventModule
+    AngularResizedEventModule,
+    BsDatepickerModule.forRoot()
   ],
   exports: [GPSmartMapComponent, GPSmartMapConfigComponent, GPSmartMapPopupComponent],
   entryComponents: [GPSmartMapComponent, GPSmartMapConfigComponent, GPSmartMapPopupComponent],

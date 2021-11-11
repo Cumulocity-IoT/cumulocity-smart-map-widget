@@ -19,7 +19,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injectable } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { AppStateService, OptionsService } from '@c8y/ngx-components';
+import { AppStateService, CoreModule, OptionsService } from '@c8y/ngx-components';
 import {
   Client,
   InventoryService,
@@ -76,6 +76,7 @@ export class MockAppStateService {
     BrowserModule,
     BrowserAnimationsModule,
     GPSmartMapModule,
+    CoreModule.forRoot(),
     RouterModule.forRoot(
       [],
     )

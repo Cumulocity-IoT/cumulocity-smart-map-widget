@@ -21,7 +21,7 @@ import {
 } from '@angular/core';
 import { ResizedEvent } from 'angular-resize-event';
 import { INIT_COORDS, C8Y_DEVICE_GROUP, C8Y_DEVICE_SUBGROUP } from '../common/tokens';
-import { InventoryBinaryService, InventoryService, IManagedObject, RealtimeAction, EventService, Realtime } from '@c8y/client';
+import { InventoryBinaryService, InventoryService, IManagedObject, EventService, Realtime } from '@c8y/client';
 import { isDevMode } from '@angular/core';
 import { Commonc8yService } from '../common/c8y/commonc8y.service';
 import * as moment_ from 'moment';
@@ -201,7 +201,7 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
     }
     private reloadMap(isFirstCall) {
         if (isDevMode() && !isAppBuilderMode) {
-            this.deviceId = '2421100'; // '1606'; // '592216'; // '78205'; // '3300'; // '25796'; // '261760'; // '914357';
+            this.deviceId = '1544'; // '1606'; // '592216'; // '78205'; // '3300'; // '25796'; // '261760'; // '914357';
             this.beaconGroupId = ''; // '25799'; // '3949';
             this.rootLong = 0; // 8.637085;
             this.rootLat = 0; // 49.814334;
@@ -216,9 +216,10 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
             this.isGeofence = false;
             this.isHeatMap = false;
             this.heatMapQuantity = '';
-            this.mapType = 'InDoorHeatMap';
+            this.mapType = 'OutDoor';
             this.loadChildDevices = false;
             this.dashboardField = '';
+            this.isLastEventHeatmap = false;
         }
         if (isAppBuilderMode) {
             this.beaconGroupId = this._config.beaconGroupId;
@@ -413,11 +414,12 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
         if (this.allSubscriptions) {
             this.allSubscriptions.forEach((s) => {
                 if (isDevMode()) { console.log('+-+- UNSUBSCRIBING FOR ', s.id); }
-                if (s.type  === 'Events') {
+                this.realTimeService.unsubscribe(s.subs);
+                /* if (s.type  === 'Events') {
                     this.realTimeService.unsubscribe(s.subs);
                 } else {
                     s.subs.unsubscribe();
-                }
+                } */
             });
         }
     }
@@ -883,77 +885,83 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
      * render single device on map based on its position
      */
     private addSingleDeviceToMap(device: any, themap, mapBounds, maxZoom?: number, isSwitch?: boolean): void {
-        const realtimeOps = {
+        /* const realtimeOps = {
             realtime: true,
             realtimeAction: RealtimeAction.UPDATE
-        };
+        }; */
         const isBeacon = this.checkIsBeacon(device.id);
         if (device && device.c8y_Position && device.c8y_Position.lat && device.c8y_Position.lng
             && (isSwitch || (isBeacon || !this.hasChildDevice(device.id) && this.isActiveDevice(device.id)))) {
+            
+            
             // REALTIME ------------------------------------------------------------------------
             // tslint:disable-next-line: deprecation
-            const imoDetail = this.invSvc.detail$(device.id, realtimeOps);
-            const detailSubs = imoDetail.subscribe(
-                (data) => {
-                    if (true) { data = data[0]; }
+            const data = device;
+            if (data && data.c8y_Position) {
+                this.updateLocationChangeTime(data);
+                if (this.allMarkers[data.id]) {
+                    this.__updateMarkerPosition(data, (!isBeacon && this.followDevice));
+                } else {
+                    // Remove existing layers
+                    if (isSwitch) {
+                        this.featureGroup.forEach((fg, idx) => {
+                            this.layerControl.removeLayer(fg.layer);
+                        });
+                    }
+                    if (!data.c8y_Position.alt) {
+                        data.c8y_Position.alt = 0;
+                    }
+                    const aMarker = this.__createMarker(data, this, isBeacon);
+                    // if (isDevMode()) console.log("+-+-+- marker created ", aMarker);
+                    this.allMarkers[data.id] = aMarker;
+                    if (!mapBounds) {
+                        mapBounds = new L.LatLngBounds(aMarker.getLatLng(), aMarker.getLatLng());
+                    } else {
+                        mapBounds.extend(aMarker.getLatLng());
+                    }
+                    let fgOnLvl = this.featureGroup.find((i) => (i.name === data.c8y_Position.alt));
+                    const markers = L.markerClusterGroup();
+                    if (!fgOnLvl) {
+                        if (this.isClusterMap) {
+                            markers.addLayer(aMarker);
+                            fgOnLvl = { name: Number(data.c8y_Position.alt), layer: L.featureGroup([markers]) };
+                            L.setOptions(fgOnLvl.layer, { name: data.c8y_Position.alt });
+                        } else {
+                            fgOnLvl = { name: Number(data.c8y_Position.alt), layer: L.featureGroup([aMarker]) };
+                            L.setOptions(fgOnLvl.layer, { name: data.c8y_Position.alt });
+                            if (isDevMode()) { console.log('+-+-+- adding feature group for single marker ', fgOnLvl); }
+                        }
+                        this.featureGroup.push(fgOnLvl);
+                    } else {
+                        if (this.isClusterMap) {
+                            markers.addLayer(aMarker);
+                            fgOnLvl.layer.addLayer(markers);
+                        } else {
+                            fgOnLvl.layer.addLayer(aMarker);
+                        }
+                    }
+                    this.addLayerToMap(themap, mapBounds, maxZoom);
+                }
+            }
+            if (this.realtime) {
+                const manaogedObjectChannel = `/managedobjects/${device.id}`;
+                const detailSubs = this.realTimeService.subscribe(
+                manaogedObjectChannel,
+                (resp) => {
+                    const data = (resp.data ? resp.data.data : {});
                     // check if this marker has already been created... and has an altitude as well to indicate its floor
                     // if no position is given, no update is done
                     if (data && data.c8y_Position) {
                         this.updateLocationChangeTime(data);
                         if (this.allMarkers[data.id]) {
                             this.__updateMarkerPosition(data, (!isBeacon && this.followDevice));
-                        } else {
-                            // Remove existing layers
-                            if (isSwitch) {
-                                this.featureGroup.forEach((fg, idx) => {
-                                    this.layerControl.removeLayer(fg.layer);
-                                });
-                            }
-                            if (!data.c8y_Position.alt) {
-                                data.c8y_Position.alt = 0;
-                            }
-                            const aMarker = this.__createMarker(data, this, isBeacon);
-                            // if (isDevMode()) console.log("+-+-+- marker created ", aMarker);
-                            this.allMarkers[data.id] = aMarker;
-                            if (!mapBounds) {
-                                mapBounds = new L.LatLngBounds(aMarker.getLatLng(), aMarker.getLatLng());
-                            } else {
-                                mapBounds.extend(aMarker.getLatLng());
-                            }
-                            let fgOnLvl = this.featureGroup.find((i) => (i.name === data.c8y_Position.alt));
-                            const markers = L.markerClusterGroup();
-                            if (!fgOnLvl) {
-                                if (this.isClusterMap) {
-                                    markers.addLayer(aMarker);
-                                    fgOnLvl = { name: Number(data.c8y_Position.alt), layer: L.featureGroup([markers]) };
-                                    L.setOptions(fgOnLvl.layer, { name: data.c8y_Position.alt });
-                                } else {
-                                    fgOnLvl = { name: Number(data.c8y_Position.alt), layer: L.featureGroup([aMarker]) };
-                                    L.setOptions(fgOnLvl.layer, { name: data.c8y_Position.alt });
-                                    if (isDevMode()) { console.log('+-+-+- adding feature group for single marker ', fgOnLvl); }
-                                }
-                                this.featureGroup.push(fgOnLvl);
-                            } else {
-                                if (this.isClusterMap) {
-                                    markers.addLayer(aMarker);
-                                    fgOnLvl.layer.addLayer(markers);
-                                } else {
-                                    fgOnLvl.layer.addLayer(aMarker);
-                                }
-                            }
-                            this.addLayerToMap(themap, mapBounds, maxZoom);
                         }
                     }
-                }, (err) => {
-                    if (isDevMode()) { console.log('+-+- got an error with the device observable ', err); }
                 });
-            if (this.realtime) {
                 this.allSubscriptions.push({
                     id: device.id, subs: detailSubs,
                     type: (isBeacon ? 'Beacon' : this.isBeaconActive ? 'Tag' : 'GPS')
                 });
-            } else {
-                detailSubs.unsubscribe();
             }
         }
     }
@@ -980,10 +988,6 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
 
             if (isDevMode()) { console.log('+-+- devices by FLOOR/CATEGORY: ', devicesByFloorAndCat); }
             if (devicesByFloorAndCat) {
-                const realtimeOps = {
-                    realtime: true,
-                    realtimeAction: RealtimeAction.UPDATE
-                };
                 Object.keys(devicesByFloorAndCat).forEach(fKey => {
                     const categoryFeatureGroups = [];
                     const categoriesInFloor = devicesByFloorAndCat[fKey];
@@ -1018,22 +1022,26 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
                                             categoryFeatureGroups.push(aMarker);
                                         }
                                         // tslint:disable-next-line: deprecation
-                                        const imoDetail = this.invSvc.detail$(imo.id, realtimeOps);
-                                        const detailSubs = imoDetail.subscribe((mobj) => {
-                                            mobj = mobj[0];
+                                        const manaogedObjectChannel = `/managedobjects/${imo.id}`;
+                                        const detailSubs = this.realTimeService.subscribe(
+                                            manaogedObjectChannel,
+                                            (resp) => {
+                                            
+                                            const mobj = (resp.data ? resp.data.data : {});
                                             this.updateLocationChangeTime(mobj);
                                             if (isDevMode()) { console.log('+-+- subscribing for object\n', [mobj, imo]); }
                                             this.__updateMarkerPosition(mobj, (!isBeacon && this.followDevice));
-                                        });
+                                            }
+                                        );
                                         if (this.realtime) {
                                             this.allSubscriptions.push({
                                                 id: imo.id, subs: detailSubs,
                                                 type: (isBeacon ? 'Beacon' : this.isBeaconActive ? 'Tag' : 'GPS')
                                             });
                                         } else {
-                                            detailSubs.unsubscribe();
+                                            this.realTimeService.unsubscribe(detailSubs);
+                                            //detailSubs.unsubscribe();
                                         }
-                                                                                // }
                                     } catch (error) {
                                         if (isDevMode()) {
                                             console.log('+-+-+- error while creating and adding marker to map\n ', [error, imo]);
@@ -1663,10 +1671,11 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
     /**
      * Heamap date filter method
      */
-    filter() {
+    async filter() {
         this.isBusy = true;
         this.heatLayer.setLatLngs([]);
-        this.renderHeatMapEvents();
+        await this.renderHeatMapEvents();
+        this.isBusy = false;
     }
 
     /**
@@ -1686,7 +1695,7 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
                                 deviceList.forEach(element => {
                                     this.heatMapDeviceEventID.push(element.id);
                                     if (this.realtime) {
-                                        this.realtTimeHeatMapEvents(element.id, RealtimeAction.CREATE);
+                                        this.realtTimeHeatMapEvents(element.id, 'CREATE');
                                     }
                                 });
                             })
@@ -1697,7 +1706,7 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
                          // this.updateDeviceMatrix(mo.id, deviceId, isBeacon);
                         this.heatMapDeviceEventID.push(mo.id);
                         if (this.realtime) {
-                            this.realtTimeHeatMapEvents(mo.id, RealtimeAction.CREATE);
+                            this.realtTimeHeatMapEvents(mo.id, 'CREATE');
                         }
                     }
                 })
@@ -1712,12 +1721,12 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
     /**
      * Render Heatmap events for given filter dates
      */
-    private renderHeatMapEvents() {
+    private async renderHeatMapEvents() {
         const deviceEventType = this.locationEventType.split(',').map(value => value.trim());
         const heatData = [];
         const eventData = [];
         let eventCounter = 0;
-        this.heatMapDeviceEventID.forEach(async eventSourceId => {
+        await this.heatMapDeviceEventID.forEach(async eventSourceId => {
             let eventListData = null;
             eventListData = await this.cmonSvc.getEventList(2000, 1, eventListData, eventSourceId, deviceEventType,
                 moment(this.fromDate).format('YYYY-MM-DDTHH:mm:ssZ'),
@@ -1877,20 +1886,22 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
         };
         const now = moment();
         // tslint:disable-next-line: deprecation
-        const eventSub = this.events.listBySource$(
-            sourceId, {
+        this.events.list(
+            {
             pageSize: 100,
             dateTo: now.add(1, 'days').format('YYYY-MM-DDTHH:mm:ssZ'),
-            dateFrom: '1970-01-01'
-        }, realtimeOps
-        ).subscribe(data => {
+            dateFrom: '1970-01-01',
+            source: sourceId
+        },
+        ).then(res => {
+            let data = res.data;
             data = data.filter((record) => deviceEventType.indexOf(record.type) > -1);
             data = data.filter((device, idx) => idx < 3);
             if (isDevMode()) {console.log('------------event subscribed-----', data); }
             this.checkLatestTagLocationEvents(data, sourceId, false);
             // Custom RealTime
-            this.realtTimeEvents(sourceId, RealtimeAction.CREATE, deviceEventType);
-            eventSub.unsubscribe();
+            this.realtTimeEvents(sourceId, 'CREATE', deviceEventType);
+        //    eventSub.unsubscribe();
         });
     }
 
@@ -1988,7 +1999,8 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
             this.allSubscriptions.forEach((s) => {
                 if (s.type === type) {
                     if (isDevMode()) { console.log('+-+- UNSUBSCRIBING FOR ', s.id); }
-                    s.subs.unsubscribe();
+                   // s.subs.unsubscribe();
+                    this.realTimeService.unsubscribe(s.sub);
                     delete this.allSubscriptions[s];
                 }
             });

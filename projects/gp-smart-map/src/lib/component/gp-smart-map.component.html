@@ -3,19 +3,32 @@
         <div class="lt-header-bar">
         <div class="lt-header-filter" *ngIf="isHeatMap && !this.realtime && !isLastEventHeatmap">
         <label>HeatMap Events :</label>
-          <mat-form-field appearance="outline" class="dateChooserStyling">
-          <input matInput [matDatepicker]="fromPicker" [max]="minCurrentDate" placeholder=" From"
-            (dateInput)="dateChanged('from',$event)" />
-          <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
-          <mat-datepicker #fromPicker></mat-datepicker>
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="dateChooserStyling">
-          <input matInput [matDatepicker]="toPicker" [min]="minToDate" [max]="currentDate" placeholder="To"
-            (dateInput)="dateChanged('to',$event)" />
-          <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
-          <mat-datepicker #toPicker></mat-datepicker>
-        </mat-form-field>
-        <button type="button" title="Filter date range" class="btn btn-default filter-btn" (click)="filter()">
+        <div class="smart-map-dateChooserStyling form-group datepicker">
+          <input
+            class="form-control"
+            placeholder="From"
+            [bsConfig]="{ customTodayClass: 'today' }"
+            (ngModelChange)="dateChanged('from',$event)" 
+            [(ngModel)]="fromDate"
+            [maxDate]="minCurrentDate"
+            title="From Date"
+            bsDatepicker
+          />
+        </div>
+        <div class="smart-map-dateChooserStyling form-group datepicker">
+          <input
+            class="form-control"
+            placeholder="TO"
+            [bsConfig]="{ customTodayClass: 'today' }"
+            (ngModelChange)="dateChanged('to',$event)" 
+            [(ngModel)]="toDate"
+            [minDate]="minToDate" 
+            [maxDate]="currentDate"
+            title="To Date"
+            bsDatepicker
+          />
+        </div>
+        <button type="button" title="Filter date range" class="btn btn-default filter-btn " (click)="filter()">
           <i c8y-icon="filter" class="fa fw fa-filter"></i>
         </button>
         </div>
@@ -41,11 +54,10 @@
                 <span [ngClass]="realtime?'c8y-pulse active' : 'c8y-pulse inactive'"></span>
                 <span>Realtime</span>      
           </button>
-          <button mat-icon-button style="color:#1776BF;" type="button" class="button"
-            (click)="refresh()"><span class="fa fa-refresh"></span></button>
+           <button style="color:#1776BF;margin-right: 5px;" type="button" class="btn btn-clean" (click)="refresh()"><i c8yIcon="refresh"></i></button>
         </div>
         </div>
     </div>
-    <mat-progress-bar *ngIf="isBusy" mode="indeterminate"></mat-progress-bar>
+    <div style="text-align: center;margin-top: -50px;" *ngIf="isBusy"><c8y-loading ></c8y-loading></div>
     <div #elfloormap [style.height.px]="height" [style.width.px]="width"></div>
 </div>
