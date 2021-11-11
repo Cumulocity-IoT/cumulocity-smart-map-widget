@@ -235,9 +235,6 @@
                  </div>
               </div>
               <div class="col-sm-8" *ngIf="!config.isOutdoorAutoZoom"  style="margin-top: 5px;">
-                <!--    <mat-slider [max]="21" [min]="1" [step]="1" [thumbLabel]="true" [tickInterval]="1"
-                     [(ngModel)]="config.outdoorZoom" >
-                   </mat-slider> -->
                    <input id="outdoorZoom" type="range" min="1" max="21" step="1" [(ngModel)]="config.outdoorZoom"/>
               </div>
             </div>
@@ -260,9 +257,6 @@
                    </div>
                </div>
                <div class="col-sm-8" *ngIf="!config.isIndoorAutoZoom"  style="margin-top: 5px;">
-                   <!-- <mat-slider [max]="28" [min]="10" [step]="0.5" [thumbLabel]="true" [tickInterval]="1"
-                     [(ngModel)]="config.indoorZoom" >
-                   </mat-slider> -->
                    <input id="indoorZoom" type="range" min="10" max="28" step="1" [(ngModel)]="config.indoorZoom"/>
                </div>
              </div>
@@ -285,9 +279,6 @@
                  </div>
                </div>
                <div class="col-sm-8" *ngIf="!config.isHeatmapAutoIntensity"  style="margin-top: 5px;">
-                 <!-- <mat-slider [max]="20" [min]="1" [step]="1" [thumbLabel]="true" [tickInterval]="1"
-                   [(ngModel)]="config.heatIntensityPerEvent" >
-                 </mat-slider> -->
                  <input id="heatIntensityPerEvent" type="range" min="1" max="20" step="1" [(ngModel)]="config.heatIntensityPerEvent"/>
                </div>
              </div>
