@@ -88,6 +88,7 @@
     display: block;
     margin-left: -2px !important;
     width: 35px;
+    text-align:center;
 }
 
 .leaflet-top,
