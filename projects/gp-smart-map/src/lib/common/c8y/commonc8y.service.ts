@@ -476,6 +476,7 @@ export class Commonc8yService {
                 this.eventService.list(eventFilter)
                     .then((resp: any) => {
                         if (resp) {
+                            resp = resp.data;
                             if (resp && resp.length >= 0) {
                                 resp = resp.filter((record) => eventTypes.indexOf(record.type) > -1);
                                 allEventList.data.push.apply(allEventList.data, resp);

@@ -317,12 +317,12 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
         if (!isFirstCall) { this.clearMapAndSubscriptions(); }
         if (isDevMode()) { console.log('selectedMarkerToggleValue... ', this.selectedMarkerToggleValue); }
         this.isBusy = true;
-        // this.heatLayer.addTo(this.map);
         if (!this.isIndoor) { this.__doRenderMap(null); }
         if (this.floorFragmentTypes && this.floorFragmentTypes !== '') {
             this.__doRenderFloorPlans();
         } else {
             if (this.isHeatMap) {
+                if(!isFirstCall) {this.heatLayer.addTo(this.map);}
                 this.renderDevicesForHeatMapEvents(this.deviceId);
                 this.isBusy = false;
             } else {
@@ -1688,6 +1688,7 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
     async filter() {
         this.isBusy = true;
         this.heatLayer.setLatLngs([]);
+        this.heatLayer.addTo(this.map);
         await this.renderHeatMapEvents();
         this.isBusy = false;
     }
