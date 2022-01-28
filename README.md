@@ -12,7 +12,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
 |APPLICATION BUILDER | CUMULOCITY | SMART MAP WIDGET |
 |--------------------|------------|------------------|
-| 1.3.x              | 1011.x.x   | 2.x.x            |
+| 1.3.x              | >= 1011.x.x| 2.x.x            |
 | 1.2.x              | 1010.x.x   | 1.x.x            |  
 
 
