@@ -1,5 +1,5 @@
 
-# Smart Map Widget for Cumulocity[<img width="35" src="https://user-images.githubusercontent.com/67993842/97668428-f360cc80-1aa7-11eb-8801-da578bda4334.png"/>](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/1.0.6/smartmap-runtime-widget-1.0.6.zip)
+# Smart Map Widget for Cumulocity[<img width="35" src="https://user-images.githubusercontent.com/67993842/97668428-f360cc80-1aa7-11eb-8801-da578bda4334.png"/>](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/2.0.0/smartmap-runtime-widget-2.0.0.zip)
 
   
 
@@ -8,8 +8,12 @@
 The Smart Map widget help you to track real-time device locations in indoor with multi floor infrastructure as well as in outdoor.
 
   
+### Please choose Smart Map release based on Cumuloicty/Application builder version:
 
-  
+|APPLICATION BUILDER | CUMULOCITY | SMART MAP WIDGET |
+|--------------------|------------|------------------|
+| 1.3.x              | 1011.x.x   | 2.x.x            |
+| 1.2.x              | 1010.x.x   | 1.x.x            |  
 
 
   
@@ -124,7 +128,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
   
 ### Runtime Widget Deployment?
 
-* This widget support runtime deployment. Download [Runtime Binary](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/1.0.6/smartmap-runtime-widget-1.0.6.zip) and use application builder to install your runtime widget.
+* This widget support runtime deployment. Download [Runtime Binary](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/2.0.0/smartmap-runtime-widget-2.0.0.zip) and use application builder to install your runtime widget.
 
 ### Installation of widget through Appbuilder or Cockipt Deployment?
   
@@ -135,13 +139,8 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
   
 
-*  **App Builder:** Tested with Cumulocity App Builder version 1.2.2.
+*  **App Builder:** Tested with Cumulocity App Builder version 1.3.0.
 
-  
-
-  
-
-*  **Cockpit Application:** Tested with Cockpit 1006.6.8 with [Patch Fix](https://www.npmjs.com/package/cumulocity-runtime-widget-loader).
 
   
 
@@ -159,7 +158,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
   
 
-* NodeJS (release builds are currently built with `v10.19.0`)
+* NodeJS (release builds are currently built with `v14.18.0`)
 
   
 
@@ -179,7 +178,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
 ```
   
- "angular-resize-event": "^1.1.1" 
+ "angular-resize-event": "^2.1.0" 
  
  "fontawesome": "4.7.2"
  
@@ -191,15 +190,13 @@ The Smart Map widget help you to track real-time device locations in indoor with
  
  "leaflet2": "npm:leaflet@^1.6.0"
  
- "@angular/material": "8.2.3"
+ "@angular/material": "11.2.3"
  
- "ngx-bootstrap": "5.5.0"
+ "ngx-bootstrap": "6.2.0"
  
  "leaflet.markercluster": "^1.4.1"
 
 ```
-
-  
 
   
 
@@ -219,7 +216,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
 
     ```
-    npm i angular-resize-event@1.1.1 fontawesome@4.7.2 group-array@1.0.0 leaflet-draw@1.0.4 leaflet-extra-markers@1.2.1 leaflet2@npm:leaflet@^1.6.0 @angular/material@8.2.3 ngx-bootstrap@5.5.0 leaflet.markercluster@1.4.1
+    npm i angular-resize-event@2.1.0 fontawesome@4.7.2 group-array@1.0.0 leaflet-draw@1.0.4 leaflet-extra-markers@1.2.1 leaflet2@npm:leaflet@^1.6.0 @angular/material@11.2.3 ngx-bootstrap@6.2.0 leaflet.markercluster@1.4.1
     ```
 
 
@@ -229,7 +226,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
   
 
-3. Grab the Smart Map **[Latest Release Binary](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/1.0.6/gp-smart-map-1.0.6.tgz)**.
+3. Grab the Smart Map **[Latest Release Binary](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/2.0.0/gp-smart-map-2.0.0.tgz)**.
 
   
 
@@ -251,7 +248,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
   
 
-5. Copy smart-map.css file [from here](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/1.0.6/smart-map.css) and paste it at /cumulocity-app-builder/ui-assets/
+5. Copy smart-map.css file [from here](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/2.0.0/smart-map.css) and paste it at /cumulocity-app-builder/ui-assets/
 
 
       
@@ -343,159 +340,6 @@ The Smart Map widget help you to track real-time device locations in indoor with
   
 
   
-
-**Installation Steps For Cockpit:**
-
-  
-
-  
-
-**Note:** If you are new to Cockpit or not yet created any cockpit application then please follow [Web SDK for Angular](https://cumulocity.com/guides/web/angular/) before proceeding further.
-
-  
-
-  
-
-1. Open Your existing Cockpit/Cumulocity project and install external dependencies by executing below command or install it manually.
-
-  
-
-  
-
-    ```    
-
-    npm i angular-resize-event@1.1.1 fontawesome@4.7.2 group-array@1.0.0 leaflet-draw@1.0.4 leaflet-extra-markers@1.2.1 leaflet2@npm:leaflet@^1.6.0 @angular/material@8.2.3 ngx-bootstrap@5.5.0 leaflet.markercluster@1.4.1
-
-    ```
-
-  
-
-  
-
-2. Install **[Smart Map Settings Widget](https://github.com/SoftwareAG/cumulocity-smart-map-settings-widget)** for indoor configuration.
-
-  
-
-  
-
-3. Grab the Smart Map **[Latest Release Binary](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/1.0.6/gp-smart-map-1.0.6.tgz)**
-
-  
-
-  
-
-4. Install the Binary file in your project.
-
-  
-
-  
-
-    ```
-
-    npm i <binary file path>/gp-smart-map-x.x.x.tgz
-
-    ```
-
-    
-
-5. Copy smart-map.css file [from here](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/1.0.6/smart-map.css) and paste it at /cumulocity-app/branding/
-
-
-     
-
-    
-
-    **Note:** If you don't find branding folder then please follow [Cumulocity Branding](https://cumulocity.com/guides/web/angular/#branding)
-
-  
-
-  
-
-6. Open branding.less located at /cumulocity-app/branding/
-
-  
-
-  
-
-7. Update branding.less file with below Material theme. Import at first line/begining of file(Please ignore this step if it already exist).
-
-  
-
-  
-
-    ```
-
-    @import '~@angular/material/prebuilt-themes/indigo-pink.css';
-
-    ```
-
-  
-
-  
-
-8. Update branding.less file with below smart-map.css. Import at last line/end of file.
-
-  
-
-  
-
-    ```
-    @import 'smart-map.css';
-
-    ```
-
-  
-
-9. Import SmartMapModule in app.module.ts file located at /cumulocity-app/
-
-  
-
-  
-
-    ```
-
-    import {GPSmartMapModule} from 'gp-smart-map';
-
-    @NgModule({
-
-      imports: [
-
-      GPSmartMapModule
-
-      ]
-    
-    })
-
-    ```
-
-  
-
-  
-
-10. Congratulation! Installation is now completed. Now you can run your app locally or build and deploy it into your tenant.
-
-  
-
-  
-
-    ```
-
-    //Start App Builder
-
-    npm run start
-
-    // Build App
-
-    npm run build
-
-    // Deploy App
-
-    npm run deploy
-
-    ```
-
-  
-
   
 
 ## Build Instructions
@@ -522,7 +366,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
   
 
-* NodeJS (release builds are currently built with `v10.19.0`)
+* NodeJS (release builds are currently built with `v14.18.0`)
 
   
 
