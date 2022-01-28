@@ -27,7 +27,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 ## What's new?
 
   
-  
+*  **Smart Map:** Smart Map widget upgrade to angular 11. 
 
 *  **Heat Map:** Real time Indoor and outdoor Heat Map based on last location event.
 
