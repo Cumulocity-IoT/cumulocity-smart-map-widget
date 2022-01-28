@@ -8,10 +8,8 @@
   },
   "manifest": {
     "noAppSwitcher": true,
-    "requiredPlatformVersion": "1006.3.0 - 1010.0.8",
-    "version": "1.0.6",
-    "author": "Darpankumar Lalani - Software AG, Global Presales",
-    "description": "It fetches Inventory data based on the device id and display the same in a widget.",
+    "requiredPlatformVersion": ">=1011.0.0",
+    "version": "2.0.0",
     "license": "Apache 2.0"
   }
 }

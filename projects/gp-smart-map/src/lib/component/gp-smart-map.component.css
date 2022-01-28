@@ -126,3 +126,8 @@ margin-left: auto;
     margin-right: 5px;
     font-weight: 400;
 }
+.smart-map-dateChooserStyling{
+    margin: 5px;
+    width: 150px;
+    display: inline-block;
+}

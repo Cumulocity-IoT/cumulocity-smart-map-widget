@@ -175,13 +175,6 @@
         <div class="col-sm-12 form-horizontal">
           <label class="mb-2 ltc-title-label">Advance Configuration</label>
           <div class="col-sm-6 ">
-            <!-- <div class="slide-toggle input-width">
-              <mat-slide-toggle class="col-sm-12 slide-toggle-margin" [checked]="config.followDevice"
-                [(ngModel)]="config.followDevice" [disabled]='config.mapType === "InDoorHeatMap" || config.mapType ===
-                "HeatMap"' ngDefaultControl>
-                Follow Device
-              </mat-slide-toggle>
-            </div> -->
             <div class="btn-group ">
               <label class="c8y-switch ">
                   <input type="checkbox" [checked]="config.followDevice" 
@@ -192,12 +185,6 @@
              </div>
           </div>
           <div class="col-sm-6 ">
-            <!-- <div class="slide-toggle input-width">
-              <mat-slide-toggle class="col-sm-12 slide-toggle-margin" [checked]="config.isGeofence"
-                [(ngModel)]="config.isGeofence" ngDefaultControl>
-                Geofence
-              </mat-slide-toggle>
-            </div> -->
             <div class="btn-group ">
               <label class="c8y-switch ">
                   <input type="checkbox" [checked]="config.isGeofence" 
@@ -212,12 +199,6 @@
     <div class="row">
       <div class="col-sm-12 form-horizontal">
           <div class="col-sm-6 ">
-            <!-- <div class="slide-toggle input-width">
-              <mat-slide-toggle class="col-sm-12 slide-toggle-margin" [checked]="config.loadChildDevices"
-                [(ngModel)]="config.loadChildDevices" ngDefaultControl [disabled]='config.mapType === "Hybrid"'>
-                Include Child Devices
-              </mat-slide-toggle>
-            </div> -->
             <div class="btn-group ">
               <label class="c8y-switch ">
                   <input type="checkbox" [checked]="config.loadChildDevices" 
@@ -227,13 +208,6 @@
              </div>
           </div>
           <div class="col-sm-6 ">
-            <!-- <div class="slide-toggle input-width">
-              <mat-slide-toggle class="col-sm-12 slide-toggle-margin" [checked]="config.isLastEventHeatmap"
-                [(ngModel)]="config.isLastEventHeatmap" ngDefaultControl [disabled]='config.mapType !== "InDoorHeatMap" && config.mapType
-                !== "HeatMap"'>
-                Heat Map - Last Event Only
-              </mat-slide-toggle>
-            </div> -->
             <div class="btn-group ">
               <label class="c8y-switch ">
                   <input type="checkbox" [checked]="config.isLastEventHeatmap" 
@@ -252,10 +226,6 @@
             <label class=" col-sm-4 control-label">Default Zoom:</label>
             <div class="col-sm-8">
               <div class="col-sm-4">
-               <!--  <mat-slide-toggle class="slide-toggle-margin" [checked]="config.isOutdoorAutoZoom"
-                  [(ngModel)]="config.isOutdoorAutoZoom" ngDefaultControl (change)="outdoorAutoChanges($event)">
-                  Auto
-                </mat-slide-toggle> -->
                 <div class="btn-group ">
                   <label class="c8y-switch ">
                       <input type="checkbox" [checked]="config.isOutdoorAutoZoom" 
@@ -264,10 +234,8 @@
                     </label>
                  </div>
               </div>
-              <div class="col-sm-8" *ngIf="!config.isOutdoorAutoZoom">
-                   <mat-slider [max]="21" [min]="1" [step]="1" [thumbLabel]="true" [tickInterval]="1"
-                     [(ngModel)]="config.outdoorZoom" >
-                   </mat-slider>
+              <div class="col-sm-8" *ngIf="!config.isOutdoorAutoZoom"  style="margin-top: 5px;">
+                   <input id="outdoorZoom" type="range" min="1" max="21" step="1" [(ngModel)]="config.outdoorZoom"/>
               </div>
             </div>
           </div>
@@ -280,10 +248,6 @@
              <label class=" col-sm-4 control-label">Default Indoor Zoom:</label>
              <div class="col-sm-8">
                <div class="col-sm-4">
-                 <!--  <mat-slide-toggle class="slide-toggle-margin" [checked]="config.isIndoorAutoZoom"
-                    [(ngModel)]="config.isIndoorAutoZoom" ngDefaultControl (change)="indoorAutoChanges($event)">
-                    Auto
-                  </mat-slide-toggle> -->
                   <div class="btn-group ">
                     <label class="c8y-switch ">
                         <input type="checkbox" [checked]="config.isIndoorAutoZoom" 
@@ -292,10 +256,8 @@
                       </label>
                    </div>
                </div>
-               <div class="col-sm-8" *ngIf="!config.isIndoorAutoZoom">
-                   <mat-slider [max]="28" [min]="10" [step]="0.5" [thumbLabel]="true" [tickInterval]="1"
-                     [(ngModel)]="config.indoorZoom" >
-                   </mat-slider>
+               <div class="col-sm-8" *ngIf="!config.isIndoorAutoZoom"  style="margin-top: 5px;">
+                   <input id="indoorZoom" type="range" min="10" max="28" step="1" [(ngModel)]="config.indoorZoom"/>
                </div>
              </div>
            </div>
@@ -308,10 +270,6 @@
              <label class=" col-sm-4 control-label">Heat Map Event Intensity:</label>
              <div class="col-sm-8">
                <div class="col-sm-4">
-                <!--  <mat-slide-toggle class="slide-toggle-margin" [checked]="config.isHeatmapAutoIntensity"
-                   [(ngModel)]="config.isHeatmapAutoIntensity" ngDefaultControl (change)="heatMapIntensityAutoChanges($event)">
-                   Auto
-                 </mat-slide-toggle> -->
                  <div class="btn-group ">
                   <label class="c8y-switch ">
                       <input type="checkbox" [checked]="config.isHeatmapAutoIntensity" 
@@ -320,10 +278,8 @@
                     </label>
                  </div>
                </div>
-               <div class="col-sm-8" *ngIf="!config.isHeatmapAutoIntensity">
-                 <mat-slider [max]="20" [min]="1" [step]="1" [thumbLabel]="true" [tickInterval]="1"
-                   [(ngModel)]="config.heatIntensityPerEvent" >
-                 </mat-slider>
+               <div class="col-sm-8" *ngIf="!config.isHeatmapAutoIntensity"  style="margin-top: 5px;">
+                 <input id="heatIntensityPerEvent" type="range" min="1" max="20" step="1" [(ngModel)]="config.heatIntensityPerEvent"/>
                </div>
              </div>
            </div>

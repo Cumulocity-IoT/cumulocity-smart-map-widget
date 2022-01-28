@@ -461,6 +461,7 @@ export class Commonc8yService {
             currentPage: pageToGet,
             dateFrom: fromDate,
             dateTo: toDate,
+            source: sourceId
         };
         if (isWithSource) {
             eventFilter.withSourceAssets = true;
@@ -472,9 +473,10 @@ export class Commonc8yService {
         return new Promise(
             (resolve, reject) => {
                 // tslint:disable-next-line: deprecation
-                const eventSub = this.eventService.listBySource$(sourceId, eventFilter)
-                    .subscribe((resp: any) => {
+                this.eventService.list(eventFilter)
+                    .then((resp: any) => {
                         if (resp) {
+                            resp = resp.data;
                             if (resp && resp.length >= 0) {
                                 resp = resp.filter((record) => eventTypes.indexOf(record.type) > -1);
                                 allEventList.data.push.apply(allEventList.data, resp);
@@ -494,9 +496,7 @@ export class Commonc8yService {
                                         .catch((err) => reject(err));
                                 }
                             }
-                            eventSub.unsubscribe();
                         } else {
-                            eventSub.unsubscribe();
                             reject(resp);
                         }
                     });

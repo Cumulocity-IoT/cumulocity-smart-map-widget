@@ -1,6 +1,6 @@
 {
     "/": {
-    "target": "<your Tenant URL>",
+    "target": "",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "info"
