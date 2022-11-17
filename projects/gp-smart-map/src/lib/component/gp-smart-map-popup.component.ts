@@ -17,7 +17,7 @@
  */
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { AppIdService } from '../common/app-id.service';
+import { Commonc8yService } from '../common/c8y/commonc8y.service';
 
 @Component({
     selector: 'lib-gp-smart-map-popup',
@@ -29,14 +29,14 @@ export class GPSmartMapPopupComponent implements OnInit {
     @Input() uniqueId: any;
     @Input() editData: any;
 
-    constructor(private router: Router, private appIdService: AppIdService) {}
+    constructor(private router: Router, private commonService: Commonc8yService) {}
     popupDisplayList = [];
     dashboardId = null;
     tabGroupId = null;
     appId = null;
 
     ngOnInit(): void {
-        this.appId = this.appIdService.getCurrentAppId();
+        this.appId = this.commonService.getAppId();
         if (this.editData) {
             this.popupDisplayList = this.editData.elem;
             this.dashboardId = this.editData.dashboardId;

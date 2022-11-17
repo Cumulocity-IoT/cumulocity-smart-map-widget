@@ -27,25 +27,29 @@ import { GPSmartMapComponent } from './component/gp-smart-map.component';
 import { GPSmartMapConfigComponent } from './config/gp-smart-map.config.component';
 import * as preview from './preview-image';
 import { ImageRotateService } from './common/imageRotate.service';
-import { AppIdService } from './common/app-id.service';
 import { GPSmartMapPopupComponent } from './component/gp-smart-map-popup.component';
 
 
 import { MatDialogModule } from '@angular/material/dialog';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { IconSelectorComponent } from './icon-selector/icon-selector.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 @NgModule({
-  declarations: [GPSmartMapComponent, GPSmartMapConfigComponent, GPSmartMapPopupComponent],
+  declarations: [GPSmartMapComponent, GPSmartMapConfigComponent, GPSmartMapPopupComponent, IconSelectorComponent],
   imports: [
     CoreModule,
     MatDialogModule,
     AngularResizedEventModule,
-    BsDatepickerModule.forRoot()
+    NgSelectModule,
+    BsDatepickerModule.forRoot(),
+    TypeaheadModule.forRoot()
   ],
-  exports: [GPSmartMapComponent, GPSmartMapConfigComponent, GPSmartMapPopupComponent],
-  entryComponents: [GPSmartMapComponent, GPSmartMapConfigComponent, GPSmartMapPopupComponent],
+  exports: [GPSmartMapComponent, GPSmartMapConfigComponent, GPSmartMapPopupComponent, IconSelectorComponent],
+  entryComponents: [GPSmartMapComponent, GPSmartMapConfigComponent, GPSmartMapPopupComponent, IconSelectorComponent],
   providers: [
-    Commonc8yService, MovingMarkerService, HeatLayerService, ImageRotateService, AppIdService,
+    Commonc8yService, MovingMarkerService, HeatLayerService, ImageRotateService,
     {
       provide: HOOK_COMPONENTS,
       multi: true,
@@ -73,5 +77,5 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
   ]
 })
 export class GPSmartMapModule {
-  constructor(private appIdService: AppIdService) {}
+  constructor() {}
  }

@@ -44,7 +44,6 @@ import { MovingMarkerService } from '../common/movingMarker.service';
 import { HeatLayerService } from '../common/heatLayer.service';
 import { ImageRotateService } from '../common/imageRotate.service';
 import { Subject } from 'rxjs';
-import { AppIdService } from '../common/app-id.service';
 import { GPSmartMapPopupComponent } from './gp-smart-map-popup.component';
 const groupArray = require('group-array');
 const moment = moment_;
@@ -79,6 +78,15 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
     isHeatMap = false;
     isClusterMap = false;
     loadChildDevices = true;
+    isMarkerIconFromAssetType = false;
+    markerIcon = '';
+    iconColor = '';
+    markerColor ='';
+    markerShape = '';
+    hierarchyLevel = 0;
+    shapeColorField = '';
+	markerColorField = '';
+	iconColorField = '';
     heatMapDeviceEventID = [];
     locationEventType = 'c8y_LocationUpdate';
     heatMapQuantity = '';
@@ -125,6 +133,7 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
     popupDetailCompRef: ComponentRef<GPSmartMapPopupComponent> = null;
     dashboardField = null;
     tabGroupField = null;
+    configDashboardList = [];
 
     // tslint:disable-next-line: variable-name
     constructor(@Inject(INIT_COORDS) protected _initCoords: InitCordInterface,
@@ -134,7 +143,7 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
                 private heatLayerService: HeatLayerService,
                 private rotateImageService: ImageRotateService,
                 private realTimeService: Realtime, private appRef: ApplicationRef, private injector: Injector,
-                private resolver: ComponentFactoryResolver, private appIdService: AppIdService) {
+                private resolver: ComponentFactoryResolver) {
         if (isDevMode()) { console.log('+-+- constructing map'); }
         // Leaflet Map Event Handlers
         this.onClickHandler = (evt: any) => this.__doClickOnMap(evt);
@@ -193,7 +202,7 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
     isDraggable = false;
     isBusy = false;
     ngOnInit() {
-        this.appId = this.appIdService.getCurrentAppId();
+        this.appId = this.cmonSvc.getAppId();
         this.reloadMap(true);
     }
     refresh() {
@@ -201,7 +210,7 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
     }
     private reloadMap(isFirstCall) {
         if (isDevMode() && !isAppBuilderMode) {
-            this.deviceId = '1544'; // '1606'; // '592216'; // '78205'; // '3300'; // '25796'; // '261760'; // '914357';
+            this.deviceId = '8200'; // '1606'; // '592216'; // '78205'; // '3300'; // '25796'; // '261760'; // '914357';
             this.beaconGroupId = ''; // '25799'; // '3949';
             this.rootLong = 0; // 8.637085;
             this.rootLat = 0; // 49.814334;
@@ -216,10 +225,20 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
             this.isGeofence = false;
             this.isHeatMap = false;
             this.heatMapQuantity = '';
-            this.mapType = 'OutDoor';
+            this.mapType = 'ClusterMap';
             this.loadChildDevices = false;
-            this.dashboardField = '';
+            this.dashboardField = 'dashboardId';
             this.isLastEventHeatmap = false;
+            this.isMarkerIconFromAssetType = true;
+            this.markerIcon = 'question';
+            this.iconColor = '#000000';
+            this.markerColor ='#ff801f';
+            this.markerShape = 'star';
+            this.hierarchyLevel = 2;
+            this.configDashboardList = [];
+            this.shapeColorField = 'smartMapShape';
+		    this.markerColorField = 'smartMapMarkerColor';
+		    this.iconColorField = 'smartMapIconColor';
         }
         if (isAppBuilderMode) {
             this.beaconGroupId = this._config.beaconGroupId;
@@ -242,6 +261,7 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
             this.heatMapQuantity = this._config.heatMapQuantity;
             this.followDevice = this._config.followDevice;
             this.mapType = this._config.mapType;
+            this.configDashboardList =  this._config.dashboardList;
 
             if (this._config.locationEventType) {
                 this.locationEventType = this._config.locationEventType;
@@ -273,6 +293,34 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
             if (this._config.heatMapLegendHigh !== null && this._config.heatMapLegendHigh !== undefined) {
                 this.heatMapLegendHigh = this._config.heatMapLegendHigh;
             }
+            if (this._config.isMarkerIconFromAssetType !== null && this._config.isMarkerIconFromAssetType !== undefined) {
+                this.isMarkerIconFromAssetType = this._config.isMarkerIconFromAssetType;
+            }
+            if (this._config.markerIcon !== null && this._config.markerIcon !== undefined) {
+                this.markerIcon = this._config.markerIcon;
+            }
+            if (this._config.iconColor !== null && this._config.iconColor !== undefined) {
+                this.iconColor = this._config.iconColor;
+            }
+            if (this._config.markerColor !== null && this._config.markerColor !== undefined) {
+                this.markerColor = this._config.markerColor;
+            }
+            if (this._config.markerShape !== null && this._config.markerShape !== undefined) {
+                this.markerShape = this._config.markerShape;
+            }
+            if (this._config.hierarchyLevel !== null && this._config.hierarchyLevel !== undefined) {
+                this.hierarchyLevel = parseInt(this._config.hierarchyLevel);
+            }
+            if (this._config.shapeColorField !== null && this._config.shapeColorField !== undefined) {
+                this.shapeColorField = this._config.shapeColorField;
+            }
+            if (this._config.markerColorField !== null && this._config.markerColorField !== undefined) {
+                this.markerColorField = this._config.markerColorField;
+            }
+            if (this._config.markerColorField !== null && this._config.markerColorField !== undefined) {
+                this.markerColorField = this._config.markerColorField;
+            }
+
         }
 
         // setup map options based on map type
@@ -335,10 +383,10 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
      * Render Devices and events based infra option selection in configuration
      */
     private renderDevicesAndEvents() {
-        if (this.selectedMarkerToggleValue === 'Devices') {
-            this.__doRenderAllDevicesForGroup(this.deviceId, -1, false);
+        if (this.selectedMarkerToggleValue === 'Beacons') {
+            this.__doRenderAllDevicesForGroup({ id: this.beaconGroupId, level: 0}, -1, -1, true);
         } else {
-            this.__doRenderAllDevicesForGroup(this.beaconGroupId, -1, true);
+            this.__doRenderAllDevicesForGroup({ id: this.deviceId, level: 0}, -1, -1, false);
         }
         if (this.isGeofence) {
             this.__doRenderGeofencesOnMap();
@@ -479,53 +527,40 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
         }
         this.map.addLayer(this.LAYER_OSM.layer);
     }
-    protected __doRenderAllDevicesForGroup(deviceId, deviceLevel, isBeacon): void {
-        const filter: object = {
-            fragmentType: 'c8y_IsDevice',
-            pageSize: 100,
-            withTotalPages: true,
-        };
+    protected __doRenderAllDevicesForGroup(record: any, deviceLevel: number, recordCounter: number, isBeacon: boolean): void {
         let deviceList: any = null;
         const t0 = performance.now();
+        recordCounter++;
         if (isDevMode()) { console.log('+-+- BEFORE CALL ', t0); }
-        if (deviceId) {// this.config.device
-            this.cmonSvc.getTargetObject(deviceId) // this.config.device.id
+        if (record?.id) {// this.config.device
+            this.cmonSvc.getTargetObject(record.id) // this.config.device.id
                 .then((mo) => {
                     if (!isBeacon) { deviceLevel++; }
-                    if (mo &&
-                        (mo.type && (mo.type.localeCompare(C8Y_DEVICE_GROUP) === 0 || mo.type.localeCompare(C8Y_DEVICE_SUBGROUP) === 0))) {
+                    if (mo && deviceLevel == 0  && !mo.c8y_IsDevice) {
+                        if (record.level !== 0) { this.filterBySelectedType(mo); };
+                        if(record.level === 0 || record.level < this.hierarchyLevel) {
                         // GET child devices
-                        this.cmonSvc.getChildDevices(deviceId, 1, deviceList) // this.config.device.id
+                            this.cmonSvc.getChildDevices(record.id, 1, this.selectedMarkerToggleValue, deviceList) // this.config.device.id
                             .then((deviceFound) => {
                                 deviceList = deviceFound.data;
-                                deviceList.forEach(element => {
-                                    this.updateDeviceMatrix(element.id, deviceId, isBeacon, false);
-                                    if (deviceLevel === 0 && (this.loadChildDevices || this.mapType === 'Hybrid')) {
-                                        if (element.childDevices && element.childDevices.references) {
-                                            const childDevices = element.childDevices.references;
-                                            childDevices.forEach(childObj => {
-                                                this.devicesToGetChildList.push(childObj.managedObject.id);
-                                                this.updateDeviceMatrix(childObj.managedObject.id, element.id, false, true);
-                                            });
-                                        }
-                                        if (element.childDevices && element.childAssets.references) {
-                                            const childAssets = element.childAssets.references;
-                                            childAssets.forEach(childObj => {
-                                                this.devicesToGetChildList.push(childObj.managedObject.id);
-                                                this.updateDeviceMatrix(childObj.managedObject.id, element.id, false, true);
-                                            });
-                                        }
-                                    }
-                                });
                                 this.allDeviceList.push.apply(this.allDeviceList, deviceList);
+                                if (record.level < this.hierarchyLevel) {
+                                    deviceList.forEach(element => {
+                                        this.updateDeviceMatrix(element.id, record.id, isBeacon, false);
+                                        if (deviceLevel <= this.hierarchyLevel  && (this.loadChildDevices || ( !this.loadChildDevices && deviceLevel >= 0)  || this.mapType === 'Hybrid')) {
+                                            this.updateChildDeviceList(element, ++record.level );
+                                        }
+                                    });
+                                }
+                               
                                 if (isDevMode()) { console.log('+-+- CHILD DEVICES FOUND ', this.allDeviceList); }
                                 if (this.selectedMarkerToggleValue === 'Beacons' ||
-                                    (!isBeacon && deviceLevel >= this.devicesToGetChildList.length)) {
+                                    (!isBeacon && (recordCounter > this.devicesToGetChildList.length ||  this.devicesToGetChildList.length == 0))) {
                                     this.addDevicesToMap(this.allDeviceList, this.map, this.defaultBounds, null);
                                 } else if (isBeacon) {
-                                    this.__doRenderAllDevicesForGroup(this.deviceId, -1, false);
+                                    this.__doRenderAllDevicesForGroup({ id: record.id, level: 0}, -1, -1, false);
                                 } else {
-                                    this.__doRenderAllDevicesForGroup(this.devicesToGetChildList[deviceLevel], deviceLevel, false);
+                                    this.__doRenderAllDevicesForGroup(this.devicesToGetChildList[recordCounter], deviceLevel,recordCounter, false);
                                 }
                             })
                             .catch((err) => {
@@ -533,33 +568,21 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
                                 const t1 = performance.now();
                                 if (isDevMode()) { console.log('+-+- AFTER GET CHILD DEVICES CALL ', (t1 - t0)); }
                             });
-                    } else {
-                        this.updateDeviceMatrix(mo.id, deviceId, isBeacon, false);
-                        if (deviceLevel === 0 && (this.loadChildDevices || this.mapType === 'Hybrid')) {
-                            if (mo.childDevices && mo.childDevices.references) {
-                                const childDevices = mo.childDevices.references;
-                                childDevices.forEach(childObj => {
-                                    this.devicesToGetChildList.push(childObj.managedObject.id);
-                                    this.updateDeviceMatrix(childObj.managedObject.id, mo.id, false, true);
-                                });
-                            }
-                            if (mo.childDevices && mo.childAssets.references) {
-                                const childAssets = mo.childAssets.references;
-                                childAssets.forEach(childObj => {
-                                    this.devicesToGetChildList.push(childObj.managedObject.id);
-                                    this.updateDeviceMatrix(childObj.managedObject.id, mo.id, false, true);
-                                });
-                            }
                         }
-                        this.allDeviceList.push(mo);
+                    } else {
+                        this.updateDeviceMatrix(mo.id, record.id, isBeacon, false);
+                        if (record.level <= this.hierarchyLevel && (this.loadChildDevices ||  ( !this.loadChildDevices && deviceLevel >= 0) || this.mapType === 'Hybrid')) {
+                            this.updateChildDeviceList(mo, ++record.level);
+                        }
+                        this.filterBySelectedType(mo);
                         if (isDevMode()) { console.log('+-+- CHILD DEVICES FOUND ', this.allDeviceList); }
                         if (this.selectedMarkerToggleValue === 'Beacons' ||
-                            (!isBeacon && deviceLevel >= this.devicesToGetChildList.length)) {
+                            (!isBeacon && recordCounter >= this.devicesToGetChildList.length)) {
                             this.addDevicesToMap(this.allDeviceList, this.map, this.defaultBounds, null);
                         } else if (isBeacon) {
-                            this.__doRenderAllDevicesForGroup(this.deviceId, -1, false);
+                            this.__doRenderAllDevicesForGroup({ id: record.id, level: 0}, -1, -1, false);
                         } else {
-                            this.__doRenderAllDevicesForGroup(this.devicesToGetChildList[deviceLevel], deviceLevel, false);
+                            this.__doRenderAllDevicesForGroup(this.devicesToGetChildList[recordCounter], deviceLevel, recordCounter, false);
                         }
                     }
                 })
@@ -568,7 +591,7 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
                 });
         } else {
             if (this.selectedMarkerToggleValue !== 'Beacons' && this.deviceId) {
-                this.__doRenderAllDevicesForGroup(this.deviceId, -1, false);
+                this.__doRenderAllDevicesForGroup({ id: record.id, level: 0}, -1, -1,  false);
             } else if (this.selectedMarkerToggleValue !== 'Beacons' && this.allDeviceList.length > 0) {
                 this.addDevicesToMap(this.allDeviceList, this.map, this.defaultBounds, null);
             } else {
@@ -576,6 +599,41 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
             }
         }
     }
+
+     /** filter devices/assets based on user selection */
+    private filterBySelectedType(mo: any) {
+        if((this.selectedMarkerToggleValue === 'Assets' &&  mo.c8y_IsAsset) ||
+        (this.selectedMarkerToggleValue === 'Devices' && mo.c8y_IsDevice) ||
+        (this.selectedMarkerToggleValue !== 'Devices' && this.selectedMarkerToggleValue !== 'Assets' ) ) {
+            this.allDeviceList.push(mo);
+        } 
+    }
+    /** Update child deviceList  */
+    private updateChildDeviceList(element: any, level:number) {
+        if (element.childDevices && element.childDevices.references) {
+          const childDevices = element.childDevices.references;
+          childDevices.forEach(childObj => {
+            this.devicesToGetChildList.push({
+              id: childObj.managedObject.id,
+              level: level
+            });
+            this.updateDeviceMatrix(childObj.managedObject.id, element.id, false, true);
+            
+          });
+        }
+        if (element.childAssets && element.childAssets.references) {
+          const childAssets = element.childAssets.references;
+          childAssets.forEach(childObj => {
+            this.devicesToGetChildList.push({
+              id: childObj.managedObject.id,
+              level: level
+            });
+            this.updateDeviceMatrix(childObj.managedObject.id, element.id, false, true);
+            
+          });
+        }
+      }
+    
 
     /**
      * Check if current device is a beacon type or not
@@ -599,8 +657,9 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
      * Check if current device is active for tracking
      */
     private isActiveDevice(deviceId) {
+
         const deviceObj = this.devicesMatrix.find(device => (device.deviceId === deviceId && device.isActive));
-        if (deviceObj) { return true; }
+        if (deviceObj || this.devicesMatrix.length == 0) { return true; }
         return false;
     }
 
@@ -1090,7 +1149,7 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
      */
     private async addLayerToMap(themap: any, mapBounds: any, maxZoom: any) {
         if (themap) {
-            await this.getChildLocationEventAndUpdateTime();
+          //  await this.getChildLocationEventAndUpdateTime();
             // add to the map only the first layer that will be shown
             let initLayerSet = false;
             const startingFloor = this.checkLowestMarkerFloor();
@@ -1200,15 +1259,15 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
     private __createMarker(mo: IManagedObject, theThis: any, isBeacon?: boolean) {
         // add floor plan, stored in the position's altitude, as option in the marker for later comparisons...
         const iconMarker = L.ExtraMarkers.icon({
-            icon: this.__getIconForType(mo.type),
-            iconColor: '#fff',
+            icon: this.__getIconForType(mo),
+            iconColor: (this.iconColorField && this.iconColorField !== ''  && mo[this.iconColorField] ? mo[this.iconColorField] : (this.iconColor !== '' ? this.iconColor : '#fff')),
             extraClasses: 'fa-sm',
-            markerColor: this.__getColorForType(mo.type),
-            shape: (isBeacon ? 'square' : 'circle'),
+            markerColor: (this.markerColorField && this.markerColorField !== '' &&  mo[this.markerColorField]  ? mo[this.markerColorField] : this.__getColorForType(mo.type)),
+            shape: (this.shapeColorField && this.shapeColorField !== '' && mo[this.shapeColorField] ? mo[this.shapeColorField] :  (this.markerShape ? this.markerShape : (isBeacon ? 'square' : 'circle'))),
             svg: 'false',
             prefix: 'fa'
         });
-        const parentData = this.getParentDeviceData(mo.id);
+        const parentData = (this.loadChildDevices ? this.getParentDeviceData(mo.id) : null);
         const iconOpts = {
             title: (parentData ? parentData.name : mo.name),
             id: mo.id,
@@ -1224,15 +1283,28 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
         ];
         let tabGroup = null;
         let dashboardId = null;
-        if (this.dashboardField) {
-            dashboardId = this.getNavigationFields(this.dashboardField, (parentData ? parentData : mo));
-        }
-        if (this.tabGroupField) {
-            tabGroup = this.getNavigationFields(this.tabGroupField, (parentData ? parentData : mo));
+        const dashboardObj = this.configDashboardList.find((dashboard) => dashboard.type === mo.type);
+        if (dashboardObj && dashboardObj.templateID) {
+            if (dashboardObj.withTabGroup) {
+                dashboardId = dashboardObj.templateID;
+                tabGroup = mo.id;
+            } else if (dashboardObj.tabGroupID) {
+                dashboardId = dashboardObj.templateID;
+                tabGroup = dashboardObj.tabGroupID;
+            } else {
+                dashboardId = dashboardObj.templateID;
+            }
+        } else {
+            if (this.dashboardField) {
+                dashboardId = this.getNavigationFields(this.dashboardField, (parentData ? parentData : mo));
+            }
+            if (this.tabGroupField) {
+                tabGroup = this.getNavigationFields(this.tabGroupField, (parentData ? parentData : mo));
+            }
         }
         let deviceListDashboard = [];
         deviceListDashboard = mo.deviceListDynamicDashboards;
-        if (parentData) {
+        if (parentData && this.loadChildDevices) {
             elem = [
                 { label: 'Name:', value: parentData.name },
                 { label: 'ID:', value: parentData.id },
@@ -1279,7 +1351,8 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
     }
 
     /**
-     * Findout navigation property in device object
+     * @depricated
+     * Findout navigation property in device object 
      */
     private getNavigationFields(dashboardField, deviceObj) {
         let navigationField = null;
@@ -1297,7 +1370,7 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
         } else if (dashboardFieldObj && dashboardFields.length === 2) {
             navigationField = dashboardFieldObj[dashboardFields[1]];
         } else {
-            navigationField = dashboardFieldObj;
+            navigationField = (dashboardFieldObj ? dashboardFieldObj : dashboardFields[0]);
         }
         return navigationField;
     }
@@ -1325,7 +1398,16 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
     /**
      * Returns the Font Awesome icon class to be used depending on the device type retrieved from Cumulocity
      */
-    private __getIconForType(type: string): string {
+    private __getIconForType(mo: any): string {
+        if(this.isMarkerIconFromAssetType && this.selectedMarkerToggleValue !== 'Devices') {
+            if(mo.icon && mo.icon.name) {
+                return `dlt-c8y-icon-${mo.icon.name}`;
+            }
+        } 
+        if (this.markerIcon !=='') {
+            return `dlt-c8y-icon-${this.markerIcon}`;
+        }
+        const type = mo.type;
         if (type) {
             if (type.toLowerCase().includes('beacon')) {
                 return 'fa-bullseye';
@@ -1342,6 +1424,7 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
         return 'fa-asterisk';
     }
     private __getColorForType(type: string): string {
+        if(this.markerColor !== '') { return this.markerColor;}
         if (type) {
             if (type.toLowerCase().includes('beacon')) {
                 return '#2c9f45';
@@ -1704,7 +1787,7 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
                     if (mo &&
                         (mo.type && (mo.type.localeCompare(C8Y_DEVICE_GROUP) === 0 || mo.type.localeCompare(C8Y_DEVICE_SUBGROUP) === 0))) {
                         // GET child devices
-                        this.cmonSvc.getChildDevices(deviceId, 1, deviceList)
+                        this.cmonSvc.getChildDevices(deviceId, 1, this.selectedMarkerToggleValue, deviceList)
                             .then((deviceFound) => {
                                 deviceList = deviceFound.data;
                                 deviceList.forEach(element => {

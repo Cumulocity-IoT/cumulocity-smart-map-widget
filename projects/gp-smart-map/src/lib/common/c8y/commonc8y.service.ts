@@ -74,11 +74,18 @@ export class Commonc8yService {
      * @param pageToGet Number of the page passed to the API
      * @param allDevices Child Devices already found
      */
-    getChildDevices(id: string, pageToGet: number, allDevices: { data: any[], res: any }): Promise<IResultList<IManagedObject>> {
+    getChildDevices(id: string, pageToGet: number, deviceType: string, allDevices: { data: any[], res: any }): Promise<IResultList<IManagedObject>> {
+        let queryString = '';
+        if(deviceType === 'Assets') {
+            queryString = 'has(c8y_IsAsset)'
+        } else if (deviceType === 'Devices') {
+            queryString = 'has(c8y_IsDevice)'
+        }
         const inventoryFilter = {
             // fragmentType: 'c8y_IsDevice',
             pageSize: 50,
             withTotalPages: true,
+            query: (queryString ? queryString : ''),
             currentPage: pageToGet
         };
         if (!allDevices) {
@@ -97,7 +104,7 @@ export class Commonc8yService {
                                 if (resp.data.length < inventoryFilter.pageSize) {
                                     resolve(allDevices);
                                 } else {
-                                    this.getChildDevices(id, resp.paging.nextPage, allDevices)
+                                    this.getChildDevices(id, resp.paging.nextPage, deviceType, allDevices)
                                         .then((np) => {
                                             resolve(allDevices);
                                         })
@@ -251,7 +258,7 @@ export class Commonc8yService {
     /**
      * Get Available Measurements for child devices
      */
-    getAvailableMeasurementsForChildDevices(aDevice: any, measurementsList: any, observableMeasurements$: BehaviorSubject<any>): void {
+ /*    getAvailableMeasurementsForChildDevices(aDevice: any, measurementsList: any, observableMeasurements$: BehaviorSubject<any>): void {
         let deviceList: any = null;
         const avMmt = null;
         if (aDevice) {
@@ -326,7 +333,7 @@ export class Commonc8yService {
                 });
         }
         // return avMmt;
-    }
+    }*/ 
 
   /*   getLastMeasurementForSource(sourceId: string, dateFrom: string, dateTo: string): ObservableList<IMeasurement> {
         const msmtFilter = {
@@ -537,4 +544,16 @@ export class Commonc8yService {
         return div.querySelector('svg');
     }
 
+    getAppId() {
+        const currentURL = window.location.href;
+        const routeParam = currentURL.split('#');
+        if (routeParam.length > 1) {
+          const appParamArray = routeParam[1].split('/');
+          const appIndex = appParamArray.indexOf('application');
+          if (appIndex !== -1) {
+            return appParamArray[appIndex + 1];
+          }
+        }
+        return '';
+      }
 }
