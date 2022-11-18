@@ -600,7 +600,7 @@ Congratulations! Smart Map is configured.
 *  **Heat Map Event Intensity:** User has ability to change location event intensity for Heat  Map. Default is Auto.
 
 
-*  **Marker Icon:**   User has ability to use marker icon which is configured during asset type creation in Digital Twin Manager(DTM) or select from pre-define list.
+*  **Marker Icon:**   User has ability to use marker icon which is configured during asset type creation in Digital Twin Manager(DTM) or select from pre-defined list.
 
 *  **Marker Icon Color:** User can select color for marker Icon by selecting color from color picker or entering color code(hex) directly in input field. Alternatively, user can also provide field name from device managed object which is having color code(hex).
 
