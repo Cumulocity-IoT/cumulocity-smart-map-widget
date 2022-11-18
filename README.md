@@ -550,7 +550,7 @@ Congratulations! Smart Map is configured.
 *  **Location Event Type(s):** Same as Hybrid Map.
 
 
-*  **Event Fragment Type:** User has ability to provide custom fragment name(e.g., c8y_location). This fragment is used to access location event from device events(default is c8y_Position).
+*  **Event Fragment Type:** User has ability to provide custom fragment name(e.g., c8y_location). This fragment is used to access location event for device/asset (default is c8y_Position).
   
 
 *  **Heat Map Event Quantity:** If custom location event has any field which can represent intensity/count of events then user can provide it. by default, system will auto calculate intensity for heat map.
