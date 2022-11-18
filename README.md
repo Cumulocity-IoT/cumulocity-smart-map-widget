@@ -30,9 +30,9 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
 *  **Marker Icons:** Now user can select any icon from pre-configured list or use from Asset Types.
 
-*  **Display Mode:** Smart Map support display mode. User can select devices, assets, infrastructure, etc. to display on map.
+*  **Display Mode:** User can select devices, assets, infrastructure, etc. to display on map.
 
-*  **Marker styles:** Now user configures custom colors for markers and select shape. User can also configure custom fragment(from device managed object) to change marker styles dynamically.
+*  **Marker styles:** Now user configure custom colors for markers and select shape. User can also configure custom fragment(from device managed object) to change marker styles dynamically.
  
 *  **Navigation from Map(Improved):** Smart map support dashboard navigation directly from map (Available only in Application Builder) based on device/asset types.
 
