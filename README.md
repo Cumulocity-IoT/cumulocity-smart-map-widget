@@ -608,7 +608,7 @@ Congratulations! Smart Map is configured.
 
 *  **Marker Shape:** User can select marker shape from dropdown menu. Smart map support four shapes(Circle, Star, Square, Penta) currently. Alternatively, user can also provide field name from device managed object which is having shape name. Please note that shape name should be any one of circle, star, square, penta(all in small letter).
 
-*  **Hierarchy Level:** User has ability to select hierarchy level of devices/assets. Based o user selection, all devices/assets will be display on map. currently up to 3 levels are supported. Please note that changing level from default may downgrade performance subject to number of devices/assets at each level you have.
+*  **Hierarchy Level:** User has ability to select hierarchy level of devices/assets. Based o user selection, all devices/assets will be display on map. Currently up to 3 levels are supported. Please note that changing level from default may downgrade performance subject to number of devices/assets at each level you have.
 
 
 *  **Dashboard Settings(Application Builder Only):** This feature is available only in application builder. User can navigate to any other dashboard by providing below details:
@@ -619,10 +619,10 @@ Congratulations! Smart Map is configured.
 
 
     * **Dashboard Field(Deprecated):** User has ability to provide device object field which represent dashboard Id. Based on this field, smart map will display navigation link for device. This option will be removed from next version.
-    * * **TabGroup Field(Deprecated):** User has ability to provide device object field which represent dashboard tab group name. Based on this field, smart map will display navigation link for device. This option will be removed from next version.
+    * **TabGroup Field(Deprecated):** User has ability to provide device object field which represent dashboard tab group name. Based on this field, smart map will display navigation link for device. This option will be removed from next version.
 
 
-	**Note:** Some of the Advance configuration options are map type specific.
+**Note:** Some of the Advance configuration options are map type specific.
 
 
 
