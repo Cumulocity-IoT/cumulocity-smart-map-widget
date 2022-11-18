@@ -1,5 +1,5 @@
 
-# Smart Map Widget for Cumulocity[<img width="35" src="https://user-images.githubusercontent.com/67993842/97668428-f360cc80-1aa7-11eb-8801-da578bda4334.png"/>](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/2.0.0/smartmap-runtime-widget-2.0.0.zip)
+# Smart Map Widget for Cumulocity[<img width="35" src="https://user-images.githubusercontent.com/67993842/97668428-f360cc80-1aa7-11eb-8801-da578bda4334.png"/>](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/2.1.0/smartmap-runtime-widget-2.1.0.zip)
 
   
 
@@ -26,101 +26,45 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
 ## What's new?
 
-  
-*  **Smart Map:** Smart Map widget upgrade to angular 11. 
+*  **Asset Hierarchy/DTM:** Now Smart Map support up to three level of asset hierarchy to display assets and devices on the Map.
 
-*  **Heat Map:** Real time Indoor and outdoor Heat Map based on last location event.
+*  **Marker Icons:** Now user can select any icon from pre-configured list or use from Asset Types.
 
-  
-  
+*  **Display Mode:** Smart Map support display mode. User can select devices, assets, infrastructure, etc. to display on map.
 
-*  **Cluster Map:** Indoor and outdoor cluster map to show case real time device tracking.
-
-  
-  
-
-*  **Geo-fences and Smart Rule:** Configure and fire smart rules based on geo-fences for indoor and outdoor devices.
-
-  
-  
-  
-*  **SVG and GeoJSON Support:**  Now Smart Map supports SVG and GeoJSON file format.
-
-  
-
-
-  
-*  **Navigation from Map:**   Dashboard navigation directly from map (Available only in Application Builder).
-
-  
-  
-  
-  
-
-*  **Smart Configuration - More Control:** Now User can control Indoor Zoom, Outdoor Zoom, Heat intensity and much more during smart map configuration.
-
-    
-  
+*  **Marker styles:** Now user configures custom colors for markers and select shape. User can also configure custom fragment(from device managed object) to change marker styles dynamically.
+ 
+*  **Navigation from Map(Improved):** Smart map support dashboard navigation directly from map (Available only in Application Builder) based on device/asset types.
 
 ## Features
 
+*  **Smart Map:** Smart Map widget upgrade to angular 11. 
   
-*  **Heat Map:** Location event based real time Heat Map for Indoor as well as for Outdoor devices.
+*  **Heat Map:** Location event based real time Heat Map for Indoor as well as for Outdoor devices. Heat Map also supports based on realtime last location event.
 
+*  **Cluster Map:** Indoor and outdoor cluster map to show case real time device tracking.
+
+*  **Geo-fences and Smart Rule:** Configure and fire smart rules based on geo-fences for indoor and outdoor devices.
   
-  
+*  **SVG and GeoJSON Support:**  Now Smart Map supports SVG and GeoJSON file format.
 
 *  **Historical Heat Map:** Build Heat Map for indoor or outdoor based on historical data.
 
-  
-  
-
 *  **Hybrid Map:** An unique map for real time tracking of your device in indoor as well as outdoor.
-
-  
-  
-  
 
 *  **Support single device and group devices:** Based on configuration during widget configuration.
 
-  
-
-  
-
 *  **Support Indoor Infrastructure settings :** Beacons, Cameras, Tags and Devices (Applicable for Indoor Map only).
-
-  
-
-  
 
 *  **Support Multiple floors :** Based on Altitude settings in device manage objects.
 
-
-
-
-*  **Smart Configuration:** Simplified configuration options based on map type.
-
-
-  
+*  **Smart Configuration:** Simplified configuration options based on map type and also control Indoor Zoom, Outdoor Zoom, Heat intensity and much more during smart map configuration.
 
 *  **[Smart Map Settings](https://github.com/SoftwareAG/cumulocity-smart-map-settings-widget):** Configure multiple floor plans with live preview.
 
-  
-
-  
-
 *  **Follow Device:** Unique Feature to follow/track your single device when device move from one floor to another floor.
 
-  
-
-  
-
 *  **Display Modes:** show/hide devices/infrastructure on indoor map.
-
-  
-
-  
-
   
 
 ## Installation
@@ -128,7 +72,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
   
 ### Runtime Widget Deployment?
 
-* This widget support runtime deployment. Download [Runtime Binary](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/2.0.0/smartmap-runtime-widget-2.0.0.zip) and use application builder to install your runtime widget.
+* This widget support runtime deployment. Download [Runtime Binary](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/2.1.0/smartmap-runtime-widget-2.1.0.zip) and use application builder to install your runtime widget.
 
 ### Installation of widget through Appbuilder 
   
@@ -139,7 +83,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
   
 
-*  **App Builder:** Tested with Cumulocity App Builder version 1.3.0.
+*  **App Builder:** Tested with Cumulocity App Builder version 1.3.1.
 
 
   
@@ -188,7 +132,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
  
  "leaflet-extra-markers": "^1.2.1"
  
- "leaflet2": "npm:leaflet@^1.6.0"
+ "leaflet2": "npm:leaflet@1.7.1"
  
  "@angular/material": "11.2.3"
  
@@ -216,7 +160,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
 
     ```
-    npm i angular-resize-event@2.1.0 fontawesome@4.7.2 group-array@1.0.0 leaflet-draw@1.0.4 leaflet-extra-markers@1.2.1 leaflet2@npm:leaflet@^1.6.0 @angular/material@11.2.3 ngx-bootstrap@6.2.0 leaflet.markercluster@1.4.1
+    npm i angular-resize-event@2.1.0 fontawesome@4.7.2 group-array@1.0.0 leaflet-draw@1.0.4 leaflet-extra-markers@1.2.1 leaflet2@npm:leaflet@1.7.1 @angular/material@11.2.3 ngx-bootstrap@6.2.0 leaflet.markercluster@1.4.1
     ```
 
 
@@ -226,7 +170,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
   
 
-3. Grab the Smart Map **[Latest Release Binary](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/2.0.0/gp-smart-map-2.0.0.tgz)**.
+3. Grab the Smart Map **[Latest Release Binary](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/2.1.0/gp-smart-map-2.1.0.tgz)**.
 
   
 
@@ -248,7 +192,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
   
 
-5. Copy smart-map.css file [from here](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/2.0.0/smart-map.css) and paste it at /cumulocity-app-builder/ui-assets/
+5. Copy smart-map.css file [from here](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/2.1.0/smart-map.css) and paste it at /cumulocity-app-builder/ui-assets/
 
 
       
