@@ -90,6 +90,7 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
     heatMapDeviceEventID = [];
     locationEventType = 'c8y_LocationUpdate';
     heatMapQuantity = '';
+    eventFragmentType = '';
     heatMapRealtimeData = [];
     heatMapRealTimeLastEventData = [];
     heatMapRealtimeEventCounter = 0;
@@ -210,7 +211,7 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
     }
     private reloadMap(isFirstCall) {
         if (isDevMode() && !isAppBuilderMode) {
-            this.deviceId = '8200'; // '1606'; // '592216'; // '78205'; // '3300'; // '25796'; // '261760'; // '914357';
+            this.deviceId = '12407663'; // '1606'; // '592216'; // '78205'; // '3300'; // '25796'; // '261760'; // '914357';
             this.beaconGroupId = ''; // '25799'; // '3949';
             this.rootLong = 0; // 8.637085;
             this.rootLat = 0; // 49.814334;
@@ -221,24 +222,25 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
             this.selectedMarkerToggleValue = 'All';
             this.measurementList = [];
             this.followDevice = false;
-            this.locationEventType = 'c8y_LocationUpdate,s7y_BeaconLocationUpdate';
+            this.locationEventType = 'c8y_LocationUpdate', // 'c8y_LocationUpdate,s7y_BeaconLocationUpdate';
             this.isGeofence = false;
             this.isHeatMap = false;
             this.heatMapQuantity = '';
-            this.mapType = 'ClusterMap';
+            this.eventFragmentType = '';
+            this.mapType = 'OutDoor';
             this.loadChildDevices = false;
-            this.dashboardField = 'dashboardId';
+            this.dashboardField = '';
             this.isLastEventHeatmap = false;
             this.isMarkerIconFromAssetType = true;
-            this.markerIcon = 'question';
-            this.iconColor = '#000000';
-            this.markerColor ='#ff801f';
-            this.markerShape = 'star';
-            this.hierarchyLevel = 2;
+            this.markerIcon = '';
+            this.iconColor = '';
+            this.markerColor ='';
+            this.markerShape = '';
+            this.hierarchyLevel = 0;
             this.configDashboardList = [];
-            this.shapeColorField = 'smartMapShape';
-		    this.markerColorField = 'smartMapMarkerColor';
-		    this.iconColorField = 'smartMapIconColor';
+            this.shapeColorField = '';
+		    this.markerColorField = '';
+		    this.iconColorField = '';
         }
         if (isAppBuilderMode) {
             this.beaconGroupId = this._config.beaconGroupId;
@@ -320,6 +322,10 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
             if (this._config.markerColorField !== null && this._config.markerColorField !== undefined) {
                 this.markerColorField = this._config.markerColorField;
             }
+            if (this._config.eventFragmentType !== null && this._config.eventFragmentType !== undefined) {
+                this.eventFragmentType = this._config.eventFragmentType;
+            }
+           
 
         }
 
@@ -1149,7 +1155,7 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
      */
     private async addLayerToMap(themap: any, mapBounds: any, maxZoom: any) {
         if (themap) {
-          //  await this.getChildLocationEventAndUpdateTime();
+             if(this.loadChildDevices ) {await this.getChildLocationEventAndUpdateTime(); }
             // add to the map only the first layer that will be shown
             let initLayerSet = false;
             const startingFloor = this.checkLowestMarkerFloor();
@@ -1283,7 +1289,7 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
         ];
         let tabGroup = null;
         let dashboardId = null;
-        const dashboardObj = this.configDashboardList.find((dashboard) => dashboard.type === mo.type);
+        const dashboardObj =(this.configDashboardList ? this.configDashboardList.find((dashboard) => dashboard.type === mo.type) : null);
         if (dashboardObj && dashboardObj.templateID) {
             if (dashboardObj.withTabGroup) {
                 dashboardId = dashboardObj.templateID;
@@ -1837,8 +1843,8 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
             if (eventCounter === this.heatMapDeviceEventID.length && eventData && eventData.length > 0) {
                 const dataLength1 = eventData.length;
                 eventData.forEach(event => {
-                    const eventC8yPosition = event.c8y_Position;
-                    if (eventC8yPosition) {
+                    const eventC8yPosition = (this.eventFragmentType && this.eventFragmentType !== '' ? event[this.eventFragmentType] : event.c8y_Position);
+                    if (eventC8yPosition && eventC8yPosition.lng && eventC8yPosition.lat) {
                         const findData = heatData.find((heatObj) =>
                             heatObj.lng === eventC8yPosition.lng && heatObj.lat === eventC8yPosition.lat);
                         if (findData) {
@@ -1868,9 +1874,9 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
                 if (eventData.realtimeAction === realtimeAction && eventData.data) {
                     deviceEventType.forEach(eventType => {
                         if (eventData.data.type && eventType.toLowerCase() === eventData.data.type.toLowerCase()) {
-                            if (this.isLastEventHeatmap) {
-                                if (eventData.data.c8y_Position) {
-                                    const eventC8yPosition = eventData.data.c8y_Position;
+                            if (this.isLastEventHeatmap && eventData.data) {
+                                const eventC8yPosition = (this.eventFragmentType && this.eventFragmentType !== '' ? eventData.data[this.eventFragmentType] :  eventData.data.c8y_Position);
+                                if (eventC8yPosition && eventC8yPosition.lng && eventC8yPosition.lat) {
                                     this.heatMapRealTimeLastEventData = this.heatMapRealTimeLastEventData.
                                         filter(lastEventData => lastEventData.id !== sourceId);
                                     this.heatMapRealTimeLastEventData.push ({
@@ -1892,8 +1898,8 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
                                 }
                             } else {
                                 this.heatMapRealtimeEventCounter++;
-                                if (eventData.data.c8y_Position) {
-                                    const eventC8yPosition = eventData.data.c8y_Position;
+                                const eventC8yPosition = (this.eventFragmentType && this.eventFragmentType !== '' ? eventData.data[this.eventFragmentType] :  eventData.data.c8y_Position);
+                                if (eventC8yPosition && eventC8yPosition.lng && eventC8yPosition.lat) {
                                     const findData = this.heatMapRealtimeData.find((heatObj) =>
                                         heatObj.lng === eventC8yPosition.lng && heatObj.lat === eventC8yPosition.lat);
                                     if (findData) {

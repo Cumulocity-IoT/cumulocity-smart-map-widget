@@ -112,6 +112,17 @@
         <div class="row">
           <div class="col-sm-12 form-horizontal">
             <div class="col-sm-12 form-group">
+              <label for="eventFragmentType" class=" col-sm-4 control-label">Event Fragment Type:</label>
+              <div class="col-sm-8">
+                <input type="text" [(ngModel)]="config.eventFragmentType" id="eventFragmentType" class="form-control"
+                  placeholder="c8y_Position(Optional)">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 form-horizontal">
+            <div class="col-sm-12 form-group">
               <label for="HeatMapQuantity" class=" col-sm-4 control-label">HeatMap Event Quantity:</label>
               <div class="col-sm-8">
                 <input type="text" [(ngModel)]="config.heatMapQuantity" id="HeatMapQuantity" class="form-control"
