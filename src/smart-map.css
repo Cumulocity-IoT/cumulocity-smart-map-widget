@@ -3,7 +3,7 @@
 @import './../node_modules/leaflet-extra-markers/dist/css/leaflet.extra-markers.min.css';
 @import './../node_modules/leaflet.markercluster/dist/MarkerCluster.css';
 @import './../node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css';
-
+@import "~@ng-select/ng-select/themes/default.theme.css";
 
 .lt-popup {
     max-width: auto;

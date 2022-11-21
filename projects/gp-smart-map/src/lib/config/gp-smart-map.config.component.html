@@ -51,18 +51,20 @@
             </div>
             </div>
         </div>
-        <div class="row">
-          <div class="col-sm-12 form-horizontal">
-            <div class="col-sm-12 form-group">
-              <label for="displayMode" class=" col-sm-4 control-label">Display Mode:</label>
-              <div class="col-sm-8">
-                <select class=" form-control" [(ngModel)]="config.selectedMarkerToggleValue"
-                  name="displayMode" id="displayMode">
-                  <option value="All" selected>All</option>
-                  <option value="Beacons" >Only Infrastructure</option>
-                  <option value="Devices" >Only Assets/Devices</option>
-                </select>
-              </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 form-horizontal">
+          <div class="col-sm-12 form-group">
+            <label for="displayMode" class=" col-sm-4 control-label">Display Mode:</label>
+            <div class="col-sm-8">
+              <select class=" form-control" [(ngModel)]="config.selectedMarkerToggleValue" (change)="getAllDevices()"
+                name="displayMode" id="displayMode">
+                <option value="All" selected>All</option>
+                <option value="Devices" >Only Devices</option>
+                <option value="Assets" >Only Assets</option>
+                <option value="AssetsDevices" >Only Assets and Devices</option>
+                <option *ngIf="config.mapType === 'InDoor' || config.mapType === 'Hybrid'" value="Beacons" >Only Infrastructure</option>
+              </select>
             </div>
           </div>
         </div>
@@ -110,6 +112,17 @@
         <div class="row">
           <div class="col-sm-12 form-horizontal">
             <div class="col-sm-12 form-group">
+              <label for="eventFragmentType" class=" col-sm-4 control-label">Event Fragment Type:</label>
+              <div class="col-sm-8">
+                <input type="text" [(ngModel)]="config.eventFragmentType" id="eventFragmentType" class="form-control"
+                  placeholder="c8y_Position(Optional)">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 form-horizontal">
+            <div class="col-sm-12 form-group">
               <label for="HeatMapQuantity" class=" col-sm-4 control-label">HeatMap Event Quantity:</label>
               <div class="col-sm-8">
                 <input type="text" [(ngModel)]="config.heatMapQuantity" id="HeatMapQuantity" class="form-control"
@@ -145,33 +158,7 @@
           </div>
         </div>
       </div>
-      <div *ngIf="appId && config.mapType !== 'InDoorHeatMap' && config.mapType !== 'HeatMap'">
-        <div class="row">
-          <div class="col-sm-12 form-horizontal">
-            <div class="col-sm-12 form-group">
-              <label for="dashboardField" class=" col-sm-4 control-label">Dashboard Field:</label>
-              <div class="col-sm-8">
-                <input type="text" [(ngModel)]="config.dashboardField" id="dashboardField" class="form-control"
-                  placeholder="deviceListDynamicDashboards.dashboardId(Optional)">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div *ngIf="appId && config.mapType !== 'InDoorHeatMap' && config.mapType !== 'HeatMap'">
-        <div class="row">
-          <div class="col-sm-12 form-horizontal">
-            <div class="col-sm-12 form-group">
-              <label for="tabGroupField" class=" col-sm-4 control-label">TabGroup Field:</label>
-              <div class="col-sm-8">
-                <input type="text" [(ngModel)]="config.tabGroupField" id="tabGroupField" class="form-control"
-                  placeholder="deviceListDynamicDashboards.tabGroup(Optional)">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
+      <div class="row col-sm-12">
         <div class="col-sm-12 form-horizontal">
           <label class="mb-2 ltc-title-label">Advance Configuration</label>
           <div class="col-sm-6 ">
@@ -196,7 +183,7 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row col-sm-12">
       <div class="col-sm-12 form-horizontal">
           <div class="col-sm-6 ">
             <div class="btn-group ">
@@ -222,10 +209,10 @@
       <div class="row"
         *ngIf="config.mapType !== 'InDoor' && config.mapType !== 'InDoorHeatMap' && config.mapType !== 'InDoorClusterMap'">
         <div class="col-sm-12 form-horizontal">
-          <div class="col-sm-12 ">
+          <div class="col-sm-12 " style="margin-bottom: 10px;">
             <label class=" col-sm-4 control-label">Default Zoom:</label>
             <div class="col-sm-8">
-              <div class="col-sm-4">
+              <div class="col-sm-5">
                 <div class="btn-group ">
                   <label class="c8y-switch ">
                       <input type="checkbox" [checked]="config.isOutdoorAutoZoom" 
@@ -234,7 +221,7 @@
                     </label>
                  </div>
               </div>
-              <div class="col-sm-8" *ngIf="!config.isOutdoorAutoZoom"  style="margin-top: 5px;">
+              <div class="col-sm-7" *ngIf="!config.isOutdoorAutoZoom"  style="margin-top: 5px;">
                    <input id="outdoorZoom" type="range" min="1" max="21" step="1" [(ngModel)]="config.outdoorZoom"/>
               </div>
             </div>
@@ -244,10 +231,10 @@
        <div class="row" 
          *ngIf="config.mapType !== 'OutDoor' && config.mapType !== 'HeatMap' && config.mapType !== 'ClusterMap'">
          <div class="col-sm-12 form-horizontal">
-           <div class="col-sm-12 ">
+           <div class="col-sm-12 " style="margin-bottom: 10px;">
              <label class=" col-sm-4 control-label">Default Indoor Zoom:</label>
              <div class="col-sm-8">
-               <div class="col-sm-4">
+               <div class="col-sm-5">
                   <div class="btn-group ">
                     <label class="c8y-switch ">
                         <input type="checkbox" [checked]="config.isIndoorAutoZoom" 
@@ -256,7 +243,7 @@
                       </label>
                    </div>
                </div>
-               <div class="col-sm-8" *ngIf="!config.isIndoorAutoZoom"  style="margin-top: 5px;">
+               <div class="col-sm-7" *ngIf="!config.isIndoorAutoZoom"  style="margin-top: 5px;">
                    <input id="indoorZoom" type="range" min="10" max="28" step="1" [(ngModel)]="config.indoorZoom"/>
                </div>
              </div>
@@ -266,7 +253,7 @@
        <div class="row"
          *ngIf="config.mapType === 'HeatMap' || config.mapType === 'InDoorHeatMap'">
          <div class="col-sm-12 form-horizontal">
-           <div class="col-sm-12 ">
+           <div class="col-sm-12 " style="margin-bottom: 10px;">
              <label class=" col-sm-4 control-label">Heat Map Event Intensity:</label>
              <div class="col-sm-8">
                <div class="col-sm-4">
@@ -285,6 +272,216 @@
            </div>
          </div>
        </div>
+       <div class="row">
+         <div class="col-sm-12 form-horizontal">
+           <div class="col-sm-12 " style="margin-bottom: 10px;">
+             <label class=" col-sm-4 control-label">Marker Icon:</label>
+             <div class="col-sm-8">
+               <div class="col-sm-5">
+                 <div class="btn-group ">
+                  <label class="c8y-switch ">
+                      <input type="checkbox" [checked]="config.isMarkerIconFromAssetType" 
+                      [(ngModel)]="config.isMarkerIconFromAssetType" 
+                      [disabled]='config.selectedMarkerToggleValue === "Devices"'>
+                      <span></span>Use from Asset Type
+                    </label>
+                 </div>
+               </div>
+               <div class="col-sm-7" >
+                 <smart-map-icon-selector id="smartMapMarkerIcon" name="smartMapMarkerIcon" [(value)]="config.markerIcon"></smart-map-icon-selector>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+       <div class="row">
+        <div class="col-sm-12 form-horizontal">
+          <div class="col-sm-12 " style="margin-bottom: 10px;">
+            <label class=" col-sm-4 control-label">Marker Icon Color:</label>
+            <div class="col-sm-8">
+              <div class="col-sm-5">
+                <input
+                  type="text"
+                  name="iconColor"
+                  placeholder="Enter color in HEX"
+                  [(ngModel)]="config.iconColor"
+                  (change)="colorUpdateByTyping($event.target.value)"
+                  maxlength="7"
+                />
+              </div>
+              <div class="col-sm-3" >
+                <input
+                class="form-control"
+                type="color"
+                [(ngModel)]="iconColorCode"
+                maxlength="7"
+                size="7"
+                (change)="colorUpdate($event.target.value)"
+              />  
+              </div>
+              <div class="col-sm-4">
+                <input
+                  type="text"
+                  name="iconColorField"
+                  placeholder="Icon Color fieldName"
+                  [(ngModel)]="config.iconColorField"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 form-horizontal">
+          <div class="col-sm-12 " style="margin-bottom: 10px;">
+            <label class=" col-sm-4 control-label">Marker Color:</label>
+            <div class="col-sm-8">
+              <div class="col-sm-5">
+                <input
+                  type="text"
+                  name="markerColor"
+                  placeholder="Enter color in HEX"
+                  [(ngModel)]="config.markerColor"
+                  (change)="markerColorUpdateByTyping($event.target.value)"
+                  maxlength="7"
+                />
+              </div>
+              <div class="col-sm-3" >
+                <input
+                class="form-control"
+                [(ngModel)]="markerColorCode"
+                type="color"
+                maxlength="7"
+                size="7"
+                (change)="markerColorUpdate($event.target.value)"
+              />  
+              </div>
+              <div class="col-sm-4">
+                <input
+                  type="text"
+                  name="markerColorField"
+                  placeholder="Marker Color fieldName"
+                  [(ngModel)]="config.markerColorField"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 form-horizontal">
+          <div class="col-sm-12 " style="margin-bottom: 10px;">
+            <label class=" col-sm-4 control-label">Marker Shape:</label>
+            <div class="col-sm-8" >
+              <div class="col-sm-5" >
+              <select class=" form-control" [(ngModel)]="config.markerShape"
+                name="markerShape" id="MarkerShape" ngDefaultControl>
+                <option value="circle" >Circle</option>
+                <option value="star" >Star</option>
+                <option value="square" >Square</option>
+                <option value="penta" >Penta</option>
+              </select>
+              </div>
+              <div class="col-sm-7">
+                <input
+                  type="text"
+                  name="shapeColorField"
+                  placeholder="Shape Color fieldName"
+                  [(ngModel)]="config.shapeColorField"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 form-horizontal">
+          <div class="col-sm-12 " style="margin-bottom: 10px;">
+            <label class="col-sm-4 control-label">Hierarchy Level:</label>
+            <div class="col-sm-8">
+            <div class="col-sm-12" >
+              <select class=" form-control" [(ngModel)]="config.hierarchyLevel" (change)="getAllDevices()"
+                name="hierarchyLevel" id="hierarchyLevel" ngDefaultControl>
+                <option value="0" >Default</option>
+                <option value="1" >Level 1</option>
+                <option value="2" >Level 2</option>
+                <option value="3" >Level 3</option>
+              </select>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      <div class="row col-sm-12">
+        <div class="col-sm-12 form-horizontal">
+          <div class="config-accordion" *ngIf="appId">
+            <button class="btn btn-default input-width" (click)="isExpandedDBS = !isExpandedDBS" type="button">
+              <div class="pull-left float-left">Dashboard Settings
+              </div>
+              <span class="float-right pull-right"><i *ngIf="isExpandedDBS" class="fa fa-caret-up"></i>
+                <i *ngIf="!isExpandedDBS" class="fa fa-caret-down"></i></span>
+            </button>
+            <div class="config-accordion" id="isExpandedDBS" *ngIf="isExpandedDBS">
+              <div class="row" style="text-align: center" *ngIf="isBusy"><c8y-loading ></c8y-loading></div>
+              <div *ngIf="!isBusy" >
+                <div class="row" *ngFor="let dashboard of config.dashboardList;let i = index">
+                  <div class="col-sm-12" style="margin-top: 10px;" *ngIf="dashboard.type">
+                    <div class="col-sm-3">
+                      <ng-select [items]="deviceTypes" bindLabel="type" [closeOnSelect]="false" [searchable]="true"
+                        placeholder="Select Device Type" appendTo="body" (change)="addNewRecord(i)" bindValue="type"
+                        [(ngModel)]="dashboard.type">
+                      </ng-select>
+                    </div>
+                    <div class="col-sm-2">
+                      <input type="text" id="dashboarId{{i}}" class="form-control input-width" placeholder="Dashbaord ID"
+                        [(ngModel)]="dashboard.templateID">
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="btn-group device-list-switch-toggle ">
+                        <label class="c8y-switch ">
+                          <input type="checkbox" id="withTabGroup{{i}}" [checked]="dashboard.withTabGroup"
+                            [(ngModel)]="dashboard.withTabGroup">
+                          <span></span> Asset/Device ID as TabGroup
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-sm-3" *ngIf="!dashboard.withTabGroup">
+                      <input type="text" id="tabGroupID{{i}}" class="form-control input-width"
+                        placeholder="TabGroup ID(Optional)" [(ngModel)]="dashboard.tabGroupID">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="appId && config.mapType !== 'InDoorHeatMap' && config.mapType !== 'HeatMap'">
+                <div class="row" style="margin-top:10px;">
+                  <div class="col-sm-12 form-horizontal">
+                    <div class="col-sm-12 form-group">
+                      <label for="dashboardField" class=" col-sm-4 control-label">Dashboard Field (Deprecated): </label>
+                      <div class="col-sm-8">
+                        <input type="text" [(ngModel)]="config.dashboardField" id="dashboardField" class="form-control"
+                          placeholder="deviceListDynamicDashboards.dashboardId(Optional)">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="appId && config.mapType !== 'InDoorHeatMap' && config.mapType !== 'HeatMap'">
+                <div class="row"  style="margin-top:10px;">
+                  <div class="col-sm-12 form-horizontal">
+                    <div class="col-sm-12 form-group">
+                      <label for="tabGroupField" class=" col-sm-4 control-label">TabGroup Field (Deprecated):</label>
+                      <div class="col-sm-8">
+                        <input type="text" [(ngModel)]="config.tabGroupField" id="tabGroupField" class="form-control"
+                          placeholder="deviceListDynamicDashboards.tabGroup(Optional)">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </c8y-form-group>
 </div>
