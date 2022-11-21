@@ -1,5 +1,5 @@
 
-# Smart Map Widget for Cumulocity[<img width="35" src="https://user-images.githubusercontent.com/67993842/97668428-f360cc80-1aa7-11eb-8801-da578bda4334.png"/>](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/2.0.0/smartmap-runtime-widget-2.0.0.zip)
+# Smart Map Widget for Cumulocity[<img width="35" src="https://user-images.githubusercontent.com/67993842/97668428-f360cc80-1aa7-11eb-8801-da578bda4334.png"/>](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/2.1.0/smartmap-runtime-widget-2.1.0.zip)
 
   
 
@@ -26,101 +26,45 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
 ## What's new?
 
-  
-*  **Smart Map:** Smart Map widget upgrade to angular 11. 
+*  **Asset Hierarchy/DTM:** Now Smart Map support up to three level of asset hierarchy to display assets and devices on the Map.
 
-*  **Heat Map:** Real time Indoor and outdoor Heat Map based on last location event.
+*  **Marker Icons:** Now user can select any icon from pre-configured list or use from Asset Types.
 
-  
-  
+*  **Display Mode:** User can select devices, assets, infrastructure, etc. to display on map.
 
-*  **Cluster Map:** Indoor and outdoor cluster map to show case real time device tracking.
-
-  
-  
-
-*  **Geo-fences and Smart Rule:** Configure and fire smart rules based on geo-fences for indoor and outdoor devices.
-
-  
-  
-  
-*  **SVG and GeoJSON Support:**  Now Smart Map supports SVG and GeoJSON file format.
-
-  
-
-
-  
-*  **Navigation from Map:**   Dashboard navigation directly from map (Available only in Application Builder).
-
-  
-  
-  
-  
-
-*  **Smart Configuration - More Control:** Now User can control Indoor Zoom, Outdoor Zoom, Heat intensity and much more during smart map configuration.
-
-    
-  
+*  **Marker styles:** Now user configure custom colors for markers and select shape. User can also configure custom fragment(from device managed object) to change marker styles dynamically.
+ 
+*  **Navigation from Map(Improved):** Smart map support dashboard navigation directly from map (Available only in Application Builder) based on device/asset types.
 
 ## Features
 
+*  **Smart Map:** Smart Map widget upgrade to angular 11. 
   
-*  **Heat Map:** Location event based real time Heat Map for Indoor as well as for Outdoor devices.
+*  **Heat Map:** Location event based real time Heat Map for Indoor as well as for Outdoor devices. Heat Map also supports based on realtime last location event.
 
+*  **Cluster Map:** Indoor and outdoor cluster map to show case real time device tracking.
+
+*  **Geo-fences and Smart Rule:** Configure and fire smart rules based on geo-fences for indoor and outdoor devices.
   
-  
+*  **SVG and GeoJSON Support:**  Now Smart Map supports SVG and GeoJSON file format.
 
 *  **Historical Heat Map:** Build Heat Map for indoor or outdoor based on historical data.
 
-  
-  
-
 *  **Hybrid Map:** An unique map for real time tracking of your device in indoor as well as outdoor.
-
-  
-  
-  
 
 *  **Support single device and group devices:** Based on configuration during widget configuration.
 
-  
-
-  
-
 *  **Support Indoor Infrastructure settings :** Beacons, Cameras, Tags and Devices (Applicable for Indoor Map only).
-
-  
-
-  
 
 *  **Support Multiple floors :** Based on Altitude settings in device manage objects.
 
-
-
-
-*  **Smart Configuration:** Simplified configuration options based on map type.
-
-
-  
+*  **Smart Configuration:** Simplified configuration options based on map type and also control Indoor Zoom, Outdoor Zoom, Heat intensity and much more during smart map configuration.
 
 *  **[Smart Map Settings](https://github.com/SoftwareAG/cumulocity-smart-map-settings-widget):** Configure multiple floor plans with live preview.
 
-  
-
-  
-
 *  **Follow Device:** Unique Feature to follow/track your single device when device move from one floor to another floor.
 
-  
-
-  
-
 *  **Display Modes:** show/hide devices/infrastructure on indoor map.
-
-  
-
-  
-
   
 
 ## Installation
@@ -128,7 +72,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
   
 ### Runtime Widget Deployment?
 
-* This widget support runtime deployment. Download [Runtime Binary](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/2.0.0/smartmap-runtime-widget-2.0.0.zip) and use application builder to install your runtime widget.
+* This widget support runtime deployment. Download [Runtime Binary](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/2.1.0/smartmap-runtime-widget-2.1.0.zip) and use application builder to install your runtime widget.
 
 ### Installation of widget through Appbuilder 
   
@@ -139,7 +83,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
   
 
-*  **App Builder:** Tested with Cumulocity App Builder version 1.3.0.
+*  **App Builder:** Tested with Cumulocity App Builder version 1.3.1.
 
 
   
@@ -188,7 +132,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
  
  "leaflet-extra-markers": "^1.2.1"
  
- "leaflet2": "npm:leaflet@^1.6.0"
+ "leaflet2": "npm:leaflet@1.7.1"
  
  "@angular/material": "11.2.3"
  
@@ -216,7 +160,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
 
     ```
-    npm i angular-resize-event@2.1.0 fontawesome@4.7.2 group-array@1.0.0 leaflet-draw@1.0.4 leaflet-extra-markers@1.2.1 leaflet2@npm:leaflet@^1.6.0 @angular/material@11.2.3 ngx-bootstrap@6.2.0 leaflet.markercluster@1.4.1
+    npm i angular-resize-event@2.1.0 fontawesome@4.7.2 group-array@1.0.0 leaflet-draw@1.0.4 leaflet-extra-markers@1.2.1 leaflet2@npm:leaflet@1.7.1 @angular/material@11.2.3 ngx-bootstrap@6.2.0 leaflet.markercluster@1.4.1
     ```
 
 
@@ -226,7 +170,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
   
 
-3. Grab the Smart Map **[Latest Release Binary](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/2.0.0/gp-smart-map-2.0.0.tgz)**.
+3. Grab the Smart Map **[Latest Release Binary](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/2.1.0/gp-smart-map-2.1.0.tgz)**.
 
   
 
@@ -248,7 +192,7 @@ The Smart Map widget help you to track real-time device locations in indoor with
 
   
 
-5. Copy smart-map.css file [from here](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/2.0.0/smart-map.css) and paste it at /cumulocity-app-builder/ui-assets/
+5. Copy smart-map.css file [from here](https://github.com/SoftwareAG/cumulocity-smart-map-widget/releases/download/2.1.0/smart-map.css) and paste it at /cumulocity-app-builder/ui-assets/
 
 
       
@@ -524,12 +468,8 @@ Congratulations! Smart Map is configured.
 *  **Asset Type:** User can select any Asset Type From Drop down. This asset types will be populated from Smart-Map-Settings widget where user has ability to create asset type and tag it with indoor floor plan or geo-fences. Based on selected asset type, corresponding asset(s) will be loaded on Smart Map.
 
 
+*  **Display Mode:** User has ability to select only devices(live tracker), only assets, only devices and assets or all. Based on selection, devices will be display on map.
 
-* **Dashboard Field(Application Builder only):** User has ability to provide device object field which represent dashboard Id. Based on this field, smart map will display navigation link for particular device.
-  
-  
-
-* **TabGroup Field(Application Builder only):** User has ability to provide device object field which represent dashboard tab group name. Based on this field, smart map will display navigation link for particular device.
 
 
 **Indoor Map:**
@@ -546,18 +486,11 @@ Congratulations! Smart Map is configured.
   
   
 
-*  **Infra Group ID:** This group should have devices which are represent infrastructure of building/floor plan such as Camera, Tag, Beacon. Smart map support Camera, Tag and Beacon and identify by device type field in device object. (Please make sure that device type field must contains keyword either 'Camera', 'Tag' or 'Beacon'. For example c8y_assetTag, c8y_beacon, c8y_camera).
+*  **Infra Group ID:** This group should have devices which are represent infrastructure of building/floor plan such as Camera, Tag, Beacon. Smart map support Camera, Tag and Beacon and identify by device type field in device object. (Please make sure that device type field must contains keyword either 'Camera', 'Tag' or 'Beacon'. For example, c8y_assetTag, c8y_beacon, c8y_camera).
 
   
 
-*  **Display Mode:** User has ability to select only devices(live tracker), only infrastructure devices(beacon,tag, etc) or both. Based on selection, devices will be display on map.
-
-  
-* **Dashboard Field(Application Builder only):** Same as outdoor Map.
-  
-  
-
-* **TabGroup Field(Application Builder only):**  Same as outdoor Map.
+*  **Display Mode:** User has ability to select only devices(live tracker), only assets, only devices and assets, only infrastructure devices(beacon, tag, etc) or all. Based on selection, devices will be display on map.
 
 
 
@@ -565,7 +498,7 @@ Congratulations! Smart Map is configured.
 
   
 
-*  **Scenario:** Hybrid Map is a unique combination of Indoor and outdoor tracking for a particular device or asset. Here selection of target assets/devices represent a asset which have two child devices which will represent indoor tracker device and outdoor tracker device. Indoor tracker device will get activated as soon as it will come in proximity of a beacon which is located as part of infrastructure of a building. If indoor tracker device not received any location event for certain time period(time period is calculated based on location event received in recent past) then Smart Map will automatically switch to outdoor tracker and display the location based on outdoor tracker.
+*  **Scenario:** Hybrid Map is a unique combination of Indoor and outdoor tracking for a particular device or asset. Here selection of target assets/devices represent a asset which have two child devices which will represent indoor tracker device and outdoor tracker device. Indoor tracker device will get activated as soon as it will come in proximity of a beacon which is located as part of infrastructure of a building. If indoor tracker device did not receive any location event for certain time period(time period is calculated based on location event received in recent past) then Smart Map will automatically switch to outdoor tracker and display the location based on outdoor tracker.
 
   
 
@@ -573,7 +506,7 @@ Congratulations! Smart Map is configured.
 
   
 
-*  **Asset Type:** Same as  outdoor Map.
+*  **Asset Type:** Same as outdoor Map.
 
   
   
@@ -587,11 +520,11 @@ Congratulations! Smart Map is configured.
 
   
 
-*  **Indoor Tracker ID:** This is indoor tracker device id which must be child device of a asset. If not provided then outdoor tracker will be used for asset tracking.
+*  **Indoor Tracker ID:** This is indoor tracker device id which must be child device of an asset. If not provided, then outdoor tracker will be used for asset tracking.
 
   
 
-*  **Outdoor Tracker ID:** This is outdoor tracker device id which must be child device of a asset. If not provided, then asset's location will be used for tracking.
+*  **Outdoor Tracker ID:** This is outdoor tracker device id which must be child device of an asset. If not provided, then asset's location will be used for tracking.
 
   
   
@@ -600,13 +533,6 @@ Congratulations! Smart Map is configured.
 
 
   
-* **Dashboard Field(Application Builder only):** Same as outdoor Map.
-  
-  
-
-* **TabGroup Field(Application Builder only):**  Same as outdoor Map.  
-  
-
 
 **Heat Map/ Indoor Heat Map:**
 
@@ -614,23 +540,24 @@ Congratulations! Smart Map is configured.
 
 *  **Target assets or devices:** Same as Outdoor Map. In Heat Map, device(s) are used to capture location events. Please note that Heat Map is not floor specific.
 
-  
 
 *  **Asset Type:** Same as outdoor Map(Applicable for Indoor Heat Map only).
 
-  
+
+*  **Display Mode:** Same as Outdoor Map.
   
 
 *  **Location Event Type(s):** Same as Hybrid Map.
 
-  
+
+*  **Event Fragment Type:** User has ability to provide custom fragment name(e.g., c8y_location). This fragment is used to access location event for device/asset (default is c8y_Position).
   
 
-*  **HeatMap Event Quantity:** If custom location event have any field which can represent intensity/count of events then user can provide it. by default system will auto calculate intensity for heat map.
+*  **Heat Map Event Quantity:** If custom location event has any field which can represent intensity/count of events then user can provide it. by default, system will auto calculate intensity for heat map.
 
   
   
-*  **HeatMap Intensity Legends:**  User has ability to provide custom legends for Low, Medium and High Intensity.
+*  **Heat Map Intensity Legends:** User has ability to provide custom legends for Low, Medium and High Intensity.
 
 
 
@@ -640,14 +567,10 @@ Congratulations! Smart Map is configured.
 *  **Target assets or devices:** Same as outdoor Map.
 
 
-*  **Asset Type:** Same as  outdoor Map(applicable only for Indoor Cluster Map).
+*  **Asset Type:** Same as outdoor Map(applicable only for Indoor Cluster Map).
 
   
-* **Dashboard Field(Application Builder only):** Same as outdoor Map.
-  
-  
-
-* **TabGroup Field(Application Builder only):**  Same as outdoor Map.
+*  **Display Mode:** Same as Outdoor Map.
 
 
 **Advance Configuration:**
@@ -659,7 +582,7 @@ Congratulations! Smart Map is configured.
 
   
 
-*  **Geofence:**  Switch on to see geofence option on Smart Map(Subject to geofence configuration in smart map configuration widget).
+*  **Geofence:** Switch on to see geofence option on Smart Map(Subject to geofence configuration in smart map configuration widget).
 
   
 *  **Include Child Device:** Switch on to include/consider child device to display instead of parent device based on active location event/tracking. Not applicable for Hybrid map.
@@ -668,17 +591,38 @@ Congratulations! Smart Map is configured.
 *  **Heat Map Last Event Only:** Switch on to display map based on last location event.  As soon as new event comes for same device, existing event location will be removed from map.
 
 
-*  **Default Zoom:**  User has ability to change outdoor zoom level. Default is Auto.
+*  **Default Zoom:** User has ability to change outdoor zoom level. Default is Auto.
 
 
 *  **Default Indoor Zoom:**   User has ability to change indoor zoom level. Default is Auto.
+
  
+*  **Heat Map Event Intensity:** User has ability to change location event intensity for Heat  Map. Default is Auto.
 
 
-*  **Heat Map Event Intensity:**  User has ability to change location event intensity for Heat  Map. Default is Auto.
+*  **Marker Icon:**   User has ability to use marker icon which is configured during asset type creation in Digital Twin Manager(DTM) or select from pre-defined list.
+
+*  **Marker Icon Color:** User can select color for marker Icon by selecting color from color picker or entering color code(hex) directly in input field. Alternatively, user can also provide field name from device managed object which is having color code(hex).
+
+*  **Marker Color:** User can select color for marker by selecting color from color picker or entering color code(hex) directly in input field. Alternatively, user can also provide field name from device managed object which is having color code(hex).
+
+*  **Marker Shape:** User can select marker shape from dropdown menu. Smart map support four shapes(Circle, Star, Square, Penta) currently. Alternatively, user can also provide field name from device managed object which is having shape name. Please note that shape name should be any one of circle, star, square, penta(all in small letter).
+
+*  **Hierarchy Level:** User has ability to select hierarchy level of devices/assets. Based o user selection, all devices/assets will be display on map. Currently up to 3 levels are supported. Please note that changing level from default may downgrade performance subject to number of devices/assets at each level you have.
 
 
-	**Note:** Advance configuration options are map type specific.
+*  **Dashboard Settings(Application Builder Only):** This feature is available only in application builder. User can navigate to any other dashboard by providing below details:
+    * **Device/Asset Type:** Select a device or asset type. Navigation will be applied to all devices/assets of this device/asset type to a specific dashboard.
+    * **Dashboard ID:** Dashboard ID of a dashboard where user need to navigate. You can find dashboard id in browser URL.
+    * **DeviceId as TabGroup:** Select this option only if you are using Group Template as dashboard in application builder and selected deviceId as tabgroup field during group template configuration.
+    * **TabGroup ID(optional):** If your dashboard is based on tabgroup then provide tabgroup id.
+
+
+    * **Dashboard Field(Deprecated):** User has ability to provide device object field which represent dashboard Id. Based on this field, smart map will display navigation link for device. This option will be removed from next version.
+    * **TabGroup Field(Deprecated):** User has ability to provide device object field which represent dashboard tab group name. Based on this field, smart map will display navigation link for device. This option will be removed from next version.
+
+
+**Note:** Some of the Advance configuration options are map type specific.
 
 
 
