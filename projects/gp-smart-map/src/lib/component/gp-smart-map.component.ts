@@ -1351,7 +1351,7 @@ export class GPSmartMapComponent implements OnInit, OnDestroy, AfterViewInit, On
         let ppContent = '';
         for (const elem of elems) {
             ppContent = ppContent +
-                `<div class="lt-popup-row"><label class="">${elem.label}</label><div class="" title="${elem.value}">${elem.value}</div></div>`;
+                `<div class="lt-popup-row" style="display: flex"><label class="">${elem.label}</label><div class="" style="flex:2;" title="${elem.value}">${elem.value}</div></div>`;
         }
         return ppContent;
     }
