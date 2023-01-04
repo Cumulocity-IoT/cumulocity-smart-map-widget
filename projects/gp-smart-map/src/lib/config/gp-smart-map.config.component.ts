@@ -110,7 +110,6 @@ export class GPSmartMapConfigComponent implements OnInit, OnDestroy, DoCheck {
 
     this.loadFloorPlanTypes();
     this.appId = this.cmonSvc.getAppId();
-    this.appId = '121';
     if (!this.config.dashboardList && this.appId) {
       const dashboardObj: DashboardConfig = {};
       dashboardObj.type = 'All';
@@ -213,7 +212,7 @@ export class GPSmartMapConfigComponent implements OnInit, OnDestroy, DoCheck {
     this.devicesToGetChildList = [];
     this.deviceTypes = null;
     this.hierarchyLevel = (this.config.hierarchyLevel ? parseInt(this.config.hierarchyLevel): 0);
-    await this.getChildDevicesAssets( { id: '8200', level: 0 },  -1);
+    await this.getChildDevicesAssets( { id: this.config?.device?.id, level: 0 },  -1);
     if(this.deviceAssetList.length > 0) {
       this.deviceTypes = Array.from(new Set(this.deviceAssetList.map(item => item.type)));
       this.deviceTypes = this.deviceTypes.filter(n => n);
