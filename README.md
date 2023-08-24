@@ -7,8 +7,7 @@
 
 The Smart Map widget help you to track real-time device locations in indoor with multi floor infrastructure as well as in outdoor.
 
-  > ### ⚠️ This project is no longer under development. Please use [cumulocity-smart-map-widget-plugin
-](https://github.com/SoftwareAG/cumulocity-smart-map-widget-plugin) for Application Builder >=2.x.x and Cumulocity >=1016.x.x⚠️
+  > ### ⚠️ This project is no longer under development. Please use [cumulocity-smart-map-widget-plugin](https://github.com/SoftwareAG/cumulocity-smart-map-widget-plugin) for Application Builder >=2.x.x and Cumulocity >=1016.x.x⚠️
 ### Please choose Smart Map release based on Cumulocity/Application builder version:
 
 |APPLICATION BUILDER | CUMULOCITY | SMART MAP WIDGET |
